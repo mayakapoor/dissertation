@@ -1,0 +1,19 @@
+Network traffic classification is critical in both network security and systems engineering. Cisco uses classification for enabling quality of service (QoS) features like fast-forwarding and buffering prioritization \cite{Cisco}. Network intrusion detection systems (NIDS) and prevention systems (NIPS) also rely on classification and identification techniques to locate malware signatures in payloads, perform dynamic access control \cite{DIAS2019143}, discover malicious flows and processes, and detect anomalies based on metadata features \cite{Boger}. Classification is also used in internet traffic monitoring systems, or sniffers. Law enforcement agencies and intelligence organizations require the ability to collect, sessionize, and analyze streams of traffic. For law enforcement agencies, network packets contain information which can be routed back to crimes and cyber threats, and big data analytics can help reconstruct these traces into useful evidence~\cite{actionable-intelligence}.
+
+\section{Problem Statement}
+Network traffic classification covers a broad scope of problems; another limitation of existing research is that solutions tend to address only one or a subset of these issues without expanding to others. In this section, we introduce several of the most pressing problems to network traffic classification today and their relevance to real world systems.
+
+\subsection{Scalability}
+
+Machine learning and deep learning based systems are plagued by computational complexity and stream buffering requirements. In much of the existing research, entire traffic flows or certain portions of flows are required before classification can begin. In a system at scale processing terabits of data per second, it is not practical to buffer this many streams in dynamic memory. Furthermore, classification speeds and models must be capable of accelerated computation through hardware or simple enough to be run in parallel quickly to keep up with line rate. For real-time classification, it may not be possible to wait for multiple packets in a single stream to identify a particular flow. Even in offline forensic analysis, entire streams may not be available or recoverable. Rather, the system must make a best effort guess without knowing the state of the traffic as to what application layer protocol is being carried for immediate parsing and processing. If possible, classifying the application layer traffic per packet would provide the lowest latency and highest throughput possible in the system.
+
+\subsection{Protocol Identification}
+
+Protocol and data exchanges in the modern internet can be complex over the lifetime of the session exchange, particularly for large amounts of transferable data. Specifically, routines like Voice-over-IP (VoIP) calls, file transfers and downloads, streaming services, and peer-to-peer sharing can transmit hundreds of thousands of packets of variable data over several minutes to hours. These exchanges are also not guaranteed to be one-to-one; for example, content servers
+
+
+\subsection{Tunneling and Routing}
+\subsection{Traffic Profiling}
+\subsection{Encryption and Compression}
+\subsection{Port Obfuscation and Spoofing}
+\subsection{Fingerprinting}

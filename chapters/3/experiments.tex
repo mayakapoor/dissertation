@@ -1,0 +1,141 @@
+\section{Experiments and Results}
+
+We performed two case studies using RExACtor regular expressions and tokens. The first is a comparison-based analysis using our own HTTP signature and ones developed by related works. Additionally, we assessed RExACtor's ability to develop a signature and keywords for SIP and RTSP, two protocols found in VoIP traffic flows. We use measures of precision, recall, and F1 score in order to assess signature efficacy.
+
+We use measures of precision, recall, and F1 score in order to assess signature efficacy. Our measure of recall is the number of packets $n$ correctly identified as protocol type $P$ divided by the sum of the number of packets $n$ correctly identified by their protocol type plus the number of packets $m$ incorrectly identified as not $P$ \cite{Zhang}.
+
+\vspace{\baselineskip}
+\[\text{Recall} = \frac{\text{$n$ correctly labeled $P$}}{\text{$n$ correctly labeled $P$ + $m$ incorrectly labeled not $P$}}\] \par
+\vspace{\baselineskip}
+
+Precision is defined as the number of packets $n$ correctly identified as protocol type $P$ divided by the sum of the number of packets $n$ correctly identified as protocol type $P$ plus the number of packets $m$ incorrectly identified as $P$ \cite{Zhang}.
+
+\vspace{\baselineskip}
+\[\text{Precision} = \frac{\text{$n$ correctly labeled $P$}}{\text{$n$ correctly labeled $P$ + $m$ incorrectly labeled $P$}}\] \par
+\vspace{\baselineskip}
+
+Finally, we also provide the F1 score for ours and other solutions.
+
+\vspace{\baselineskip}
+\[\text{F1} = 2 \times \frac{\text{Precision $\times$ Recall}}{\text{Precision + Recall}}\] \par
+\vspace{\baselineskip}
+
+In addition to these data science measurements, we record, analyze, and compare heap usage using valgrind. We also compare the heap allocation for our signatures and signatures from comparable works to show our solution's improvements.
+
+We use packet capture (PCAP) data from live network captures for both training and testing scenarios. An interesting note on training data is that in our cases, RExACtor did not require more than a few hundred starting lines in order to create quality signatures. We found that as long as the starting lines were from a diverse set of captures so that variable URLs, ports, and addresses were not over-represented, the common features were both discovered and generalized enough for re-usability. This demonstrates that RExACtor may be able to create specific signatures for protocols which may not appear frequently in a data set.
+
+To create HTTP signatures with RExACtor, we used a small data set of mixed background traffic containing 213 HTTP request packets and 1000 HTTP responses. The resulting signatures and tokens are provided in Table \ref{table:http}. For the VoIP protocol tests, we used 252 SIP request packets and 230 responses for training signatures, and 638 RTSP responses and 562 RTSP requests. Our signatures and tokens for these are provided in Table \ref{table:voip}. We ran tests on data sets from a live capture environment of background web traffic containing 1000 HTTP packets, 1000 SIP packets, 1000 RTSP packets, and 1000 packets of other mixed protocol types, including FTP, SMTP, ICMP, and others.
+
+RExACtor is a Python tool library designed with Python 3.8. We use the efficient-apriori library (v. 1.1.1) \cite{efficient-apriori} for tokenization, PyShark for data pre-processing (v. 0.4.3) \cite{pyshark}, and numpy (v. 1.21) \cite{numpy} data structures for optimization.  The scanning framework used for testing regular expression matching is written in C++ using Boost 1.63 \cite{boost} and Hyperscan 5.4.0 \cite{hyperscan} libraries for regular expression creation and matching, respectively. All experiments were performed on a single i9 Dell computer with Ubuntu 20.04 installed.
+
+\subsection{Case Study A: HTTP Detection}
+
+\begin{table*}[t]
+  \centering
+  \begin{tabular}{|l|l|p{0.4\linewidth}|p{0.3\linewidth}|}
+ \hline
+ Source & Side & Signatures & Tokens \\ [0.5ex]
+ \hline\hline
+ AutoSig \cite{AutoSig} & N/A & N/A & [HTTP/1.]; [GET\textbackslash0x20/] [HTTP/1.];\\
+ \hline
+ LASER \cite{LASER} & N/A & N/A & [HTTP/1.1] \\
+ \hline
+ Wang et al \cite{WANG2012992} & Request & $\string^$(GET $\vert$ HEAD $\vert$ POST).*HTTP/1.(1$\vert$0)\textbackslash x0D\textbackslash x0A & N/A\\
+ \cline{2-4}
+  & Response & $\string^$HTTP/1.(1$\vert$0) [2$\vert$3$\vert$4$\vert$5]0.*\textbackslash x0D\textbackslash x0A & N/A \\
+ \hline
+ LCS Algorithm \cite{VinothGeorge2013EfficientRE} & N/A & $\string^$(HTTP/1.1 $\vert$ Host:.u $\vert$ Connection:keep-alive $\vert$ User-Agent:Mozilla/5.0 $\vert$ Accept: $\vert$ Accept-Encoding:ga $\vert$ Accept-Language:en-US.*en;q=0.8 $\vert$ Accept-Charset:ISO-8859-1)  & [HTTP/1.1]; [Host:.u]; [Connection:keep-alive]; [User-Agent:Mozilla/5.0]; [Accept:]; [Accept-Encoding:ga]; [Accept-Language:en-US.*en;q=0.8]; [Accept-Charset:ISO-8859-1]\\
+ \hline
+ RExACtor & Request & $\string^$(GET / $\vert$ POST / $\vert$ POST $\vert$ POST /mail $\vert$ HEAD /).\{0,2048\}( HTTP/1.1\textbackslash r\textbackslash n)\$ & [HTTP/1.]\\
+ \cline{2-4}
+ & Response & $\string^$(HTTP/1.1 $\vert$HTTP/1.).\{0,3\}.\{0,24\}\textbackslash\textbackslash S(\textbackslash r\textbackslash n)\$ & [HTTP/1.] \\ [1ex]
+ \hline
+  \end{tabular}
+  \caption{HTTP Signatures and Tokens}
+  \label{table:http}
+\end{table*}
+
+The results of scanning related works' regular expressions and our own on the testing dataset showed comparable recall for Wang et al's system and RExACtor. The longest common substring algorithm (LCS) signature performed significantly worse. For our dataset, all systems for both regular expression scanning and literal token scanning had perfect precision, including RExACtor. Because precision in our data set was ideal for all systems, the F1 Score results are comparable to the recall results.
+
+While precision and recall results were on par with the state-of-the art, RExACtor's signature required significantly less heap space than either Wang et al's solution or LCS when performing regular expression scanning. This demonstrates RExACtor's superior performance in real embedded systems where memory optimization is a critical factor.
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|l|l|l|l|l|}
+   \hline
+   Solution & P & R & F1 & Allocation \\
+   \hline\hline
+   Wang et al & 1.000 & 0.984 & 0.992 & 20,783,011 bytes\\
+   LCS & 1.000 & 0.254 & 0.405 & 36,015,510 bytes \\
+   RExACtor & 1.000 & 0.976 & 0.989 & 18,310,656 bytes\\
+
+   \hline
+  \end{tabular}
+  \caption{HTTP Case Study Results for Regular Expressions}
+  \label{table:httpprecisionregex}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|l|l|l|l|l|}
+   \hline
+   Solution & P & R & F1 & Allocation \\
+   \hline\hline
+   AutoSig & 1.000 & 0.989 & 0.994 & 548,715 bytes \\
+   LASER & 1.000 & 0.865 & 0.928 & 457,778 bytes \\
+   RExACtor & 1.000 & 0.989 & 0.994 & 457,280 bytes \\
+   \hline
+  \end{tabular}
+  \caption{HTTP Case Study Results for Tokens}
+  \label{table:httpprecisiontokens}
+\end{table}
+
+\subsection{Case Study B: VoIP Detection}
+\begin{table*}[t]
+  \centering
+  \begin{tabular}{|l|l|p{0.5\linewidth}|p{0.3\linewidth}|}
+   \hline
+   Protocol & Side & Signatures & Tokens \\ [0.5ex]
+   \hline\hline
+   SIP & Request & $\string^$(INVITE sip:$\vert$ACK sip:$\vert$BYE sip:$\vert$REGISTER sip:).\{0,74\}( SIP/2.0)\$ & [ sip:];[ SIP/2.0] \\
+   \cline{2-4}
+   & Response & $\string^$(SIP/2.0 200 OK$\vert$SIP/2.0 40$\vert$SIP/2.0 100 Trying$\vert$SIP/2.0 180 Ringing$\vert$SIP/2.0 4$\vert$SIP/2.0 18$\vert$SIP/2.0 ).\{0,31\} & [SIP/2.0 ] \\
+  \hline
+  RTSP & Request & $\string^$(TEARDOWN rtsp://$\vert$DESCRIBE rtsp://$\vert$SETUP rtsp://$\vert$PLAY rtsp://).\{0,85\}( RTSP/1.0\textbackslash r\textbackslash n)\$ & [rtsp://];[RTSP/1.0\textbackslash r\textbackslash n] \\
+  \cline{2-4}
+  & Response & $\string^$(RTSP/1.0 )\textbackslash\textbackslash d\textbackslash\textbackslash d\textbackslash\textbackslash d .\{0,6\}[a-zA-Z](\textbackslash r\textbackslash n)\$ & [RTSP/1.0 ] \\
+  \hline
+  \end{tabular}
+  \caption{VoIP Signatures and Tokens}
+  \label{table:voip}
+\end{table*}
+
+In addition to a comparison study using HTTP, we ran precision, recall, and memory allocation tests for RExACtor signatures for two VoIP protocols. In future work, we could expand this to chat, email, and other text-based protocols with the goal of targeting signatures for application-specific signature generation and protocol analysis. For example, we would want to target identifying and distinguishing between Skype, Zoom, or Webex traffic flows \cite{Zhang}. RExACtor performed amicably with perfect recall and precision in our dataset. Heap allocation results were also comparable to HTTP, showing that the good performance from the case study was not anomalous but rather indicative of good signature construction by RExACtor.
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|l|l|l|l|l|}
+   \hline
+   Protocol & P & R & F1 & Allocation \\
+   \hline\hline
+   SIP & 1.000 & 1.000 & 1.000 & 34,449,057 bytes\\
+   RTSP & 1.000 & 1.000 & 1.000 & 14,972,715 bytes \\
+   \hline
+  \end{tabular}
+  \caption{VoIP Results for Regular Expressions}
+  \label{table:voipregex}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|l|l|l|l|l|}
+   \hline
+   Protocol & P & R & F1 & Allocation \\
+   \hline\hline
+   SIP & 1.000 & 1.000 & 1.000 & 3,234,815 bytes\\
+   RTSP & 1.000 & 1.000 & 1.000 & 3,624,176 bytes \\
+   \hline
+  \end{tabular}
+  \caption{VoIP Results for Tokens}
+  \label{table:voiptokens}
+\end{table}

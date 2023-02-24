@@ -1,0 +1,98 @@
+\section{Experiments and Results}
+
+We experimented with the RTP detection problem that was previously attempted with the \textsc{Maple} model in chapter 5 in order to assess the ability to detect weakly signatured data. Then, we extend this to H.225 detection, which is a similarly weakly signatured data transfer protocol. Lastly, the model performance and throughput is assessed for its application to deep packet inspection and deep learning at scale.
+
+All tests were performed on a single CPU of a 1.6 GHz dual-core Intel i5 processor with 16 GB DDR3 RAM. In the binary confusion matrix, true positive (TP) indicates correct classification of data as RTP. True negative (TN) is correct classification of data as non-RTP. false negative (FN) implies incorrect identification of traffic as non-RTP, and false positive (FP) is the incorrect classification of data as RTP. We use measurements of precision, recall, and F1-score for model evaluation, defined as follows:
+\begin{equation}
+\begin{split}
+    Recall = \frac{TP}{TP + FP} \text{  }
+    Precision = \frac{TP}{TP + FN} \\
+    F1\text{ }Score = \frac{2(P\times R)}{P + R} \\
+    \end{split}
+\end{equation}
+
+Epochs represent the number of passes made over the training data in order for the neural network to fine tune itself under supervision. Although more epochs does not guarantee better performance, it is observed that a larger number of epochs within reason is a good method to improving metric results. All tests were performed with undersampling to appropriately balance the dataset, and a 60/40 training and test split.
+
+\subsection{RTP Detection}
+The primary motivation for designing the density analysis model was to capture the spatial hidden representations which may be present in geometric transformations of packet payloads as dynamic ports and weak signatures make traditional signature-based or port-based methodologies ineffective. The classification results of the \textsc{Date} model are provided in Table~\ref{tab:rtpresults}. Table~\ref{tab:rtpresultslsh} show the combined \textsc{Alpine} and \textsc{Palm} technique's results for the RTP classification task. There is clear improvement for the \textsc{Date} model.
+
+\begin{table} [h!]
+\centering
+\begin{tabular}{| r | c | c | c |}
+\hline
+Class & P & R & F1 \\
+\hline
+\textit{Non-RTP} & 0.73 & 0.77 & 0.75 \\
+\textit{RTP} & 0.76 & 0.71 & 0.73 \\
+\hline
+\end{tabular}
+\caption{Classification results of RTP vs non-RTP detection for the LSH model.}
+\label{tab:rtpresultslsh}
+\end{table}
+
+\begin{table} [h!]
+\centering
+\begin{tabular}{| r | c | c | c |}
+\hline
+Class & P & R & F1 \\
+\hline
+\textbf{1 Epoch} &&& \\
+\textit{Non-RTP} & 0.85 & 0.84 & 0.84 \\
+\textit{RTP} & 0.83 & 0.85 & 0.84 \\
+\hline
+\textbf{10 Epochs} &&& \\
+\textit{Non-RTP} & 0.94 & 0.81 & 0.87 \\
+\textit{RTP} & 0.83 & 0.95 & 0.89 \\
+\hline
+\textbf{20 Epochs} &&& \\
+\textit{Non-RTP} & 0.96 & 0.79 & 0.87 \\
+\textit{RTP} & 0.82 & 0.96 & 0.89 \\
+\hline
+\end{tabular}
+\caption{Classification results of RTP vs non-RTP detection for the \textsc{Date} model.}
+\label{tab:rtpresults}
+\end{table}
+
+\subsection{H.225 Detection}
+A similar detection problem exists for H.225 signaling protocol, which handles the registration and call setup for certain VoIP architectures using the H.323 protocol suite. Like RTP, the H.225 data may arrive to an endpoint first before the H.323 data, and also suffers from a weak signature. Thus, we additionally tested \textsc{DATE}'s ability to detect H.225 traffic from non-H.225 traffic. Our setup of the dataset labels and the DBSCAN configuration was similar to the RTP test and results are given in Table~\ref{tab:h225results}. The performance of the LSH models is provided in Table~\ref{tab:h225resultslsh} for a baseline.
+
+\begin{table} [h!]
+\centering
+\begin{tabular}{| r | c | c | c |}
+\hline
+Class & P & R & F1 \\
+\hline
+\textit{Non-H.225} & 0.62 & 0.64 & 0.63 \\
+\textit{H.225} & 0.63 & 0.61 & 0.62 \\
+\hline
+\end{tabular}
+\caption{Classification results of H.225 vs non-H.225 detection for the LSH model.}
+\label{tab:h225resultslsh}
+\end{table}
+
+
+\begin{table} [h!]
+\centering
+\begin{tabular}{| r | c | c | c |}
+\hline
+Class & P & R & F1 \\
+\hline
+\textbf{1 Epoch} &&& \\
+\textit{Non-H.225} & 0.98 & 0.83 & 0.90 \\
+\textit{H.225} & 0.85 & 0.99 & 0.92 \\
+\hline
+\textbf{10 Epochs} &&& \\
+\textit{Non-H.225} & 0.91 & 0.87 & 0.89 \\
+\textit{H.225} & 0.88 & 0.92 & 0.90 \\
+\hline
+\textbf{20 Epochs} &&& \\
+\textit{Non-H.225} & 0.98 & 0.83 & 0.90 \\
+\textit{H.225} & 0.85 & 0.99 & 0.92 \\
+\hline
+\end{tabular}
+\caption{Classification results of H.225 vs non-H.225 detection for the \textsc{Date} model.}
+\label{tab:h225results}
+\end{table}
+
+\subsection{Model Performance and Throughput}
+In order to benchmark the system for real deployment, we recorded the time classification took. While this is heavily system dependent and showed some variance across parameter tuning or model configuration, the average classification time for a single packet by \textsc{DATE} was 0.15823 seconds.
