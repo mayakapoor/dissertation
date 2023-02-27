@@ -13,15 +13,15 @@ A high recall indicates that in the binary problem, much of the traffic is corre
 
 \subsection{VPN Traffic Profiling}
 
-We analyzed the ISCX VPN/non-VPN dataset according to the applications and traffic types identified by the researchers who generated the data and Lotfollahi et al~\cite{deeppacket} who used the same data for per-packet classification in their Deep Packet models. They used a convolutional neural network and stacked autencoder model for implementations. We used three different configurations of Forager for the traffic and application classification tasks. For each problem, we ran a combination of ALPINE and one of the payload transformation models. For application classification, DeepPacket's CNN model achieved very high F1 scores for most of the applications. Overall, each model is quite successful in distinguishing applications without inspecting packet contents, preserving user privacy while still accomplishing the mission. In the threat model, Alice could use our tool to better understand what kind of internet behavior Bob is engaging in over his VPN connection. We notice in both application and traffic classification tasks, our \textsc{Forager} models achieve some improved results in the VoIP categories. Our models also perform significantly better in profiling the benign/non-VPN traffic types, up to 0.13 higher than the stacked auto encoder in the VoIP category as well. When ICQ and AIM were combined under the Chat category, \textsc{Forager} achieves much higher results than any other model. For all models, distinguishing ICQ and AIM traffic was a difficult task. In further investigation into the network environment, we found both of these traffic streams were generated from the Pidgin messaging application, which makes sense that they were misclassified as one another in all the models. We also note that apps which use similar protocol stacks or likely similar APIs tend to be misclassified as one another. for example, FTPS and SFTP (both using FTP) are more difficult to distinguish from one another than either against SCP using SSH~\cite{deeppacket}. This is an important note for training and defining classes for neural network models in general, as well-defined classes or clusters make classification a clearer task. One significant difference in the experimental setup of Deep Packet versus \textsc{Forager} is that DeepPacket's CNN requires 300 epochs to train the entire network. \textsc{Maple} achieves near comparable results at a mere 10 epochs of training on the same data and split. \textsc{Date} also achieves good results only training with 10 epochs on its statistical model. We ran additional tests, increasing the number of epochs in order to determine if this improved our models' efficacy. In each case, 10 epochs proved to be sufficient for training \textsc{Forager} to maximum performance capability.
+We analyzed the ISCX VPN/non-VPN dataset according to the applications and traffic types identified by the researchers who generated the data and Lotfollahi et al~\cite{deeppacket} who used the same data for per-packet classification in their Deep Packet models. They used a convolutional neural network and stacked autencoder model for implementations. We used three different configurations of \textsc{Forager} for the traffic and application classification tasks. For each problem, we ran a combination of \textsc{Alpine} and one of the payload transformation models. For application classification, DeepPacket's CNN model achieved very high F1 scores for most of the applications. Overall, each model is quite successful in distinguishing applications without inspecting packet contents, preserving user privacy while still accomplishing the mission. In the threat model, Alice could use our tool to better understand what kind of internet behavior Bob is engaging in over his VPN connection. We notice in both application and traffic classification tasks, our \textsc{Forager} models achieve some improved results in the VoIP categories. Our models also perform significantly better in profiling the benign/non-VPN traffic types, up to 0.13 higher than the stacked auto encoder in the VoIP category as well. When ICQ and AIM were combined under the Chat category, \textsc{Forager} achieves much higher results than any other model. For all models, distinguishing ICQ and AIM traffic was a difficult task. In further investigation into the network environment, we found both of these traffic streams were generated from the Pidgin messaging application, which makes sense that they were misclassified as one another in all the models. We also note that apps which use similar protocol stacks or likely similar APIs tend to be misclassified as one another. for example, FTPS and SFTP (both using FTP) are more difficult to distinguish from one another than either against SCP using SSH~\cite{deeppacket}. This is an important note for training and defining classes for neural network models in general, as well-defined classes or clusters make classification a clearer task. One significant difference in the experimental setup of Deep Packet versus \textsc{Forager} is that DeepPacket's CNN requires 300 epochs to train the entire network. \textsc{Maple} achieves near comparable results at a mere 10 epochs of training on the same data and split. \textsc{Date} also achieves good results only training with 10 epochs on its statistical model. We ran additional tests, increasing the number of epochs in order to determine if this improved our models' efficacy. In each case, 10 epochs proved to be sufficient for training \textsc{Forager} to maximum performance capability.
 
 \begin{table*} [ht!]
-\begin{tabular} {|p{2cm}|p{2.3cm}|p{2.3cm}|p{2.3cm}|p{2.4cm}|p{2.4cm}|}
+\resizebox{\textwidth}{!}{\begin{tabular} {|p{2.3cm}|p{2.2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
 \hline
-\textbf{Application} & DeepPacket-CNN & DeepPacket-SAE & ALPINE+PALM & ALPINE+MAPLE & ALPINE+DATE \\
+\textbf{Application} & DeepPacket-CNN & DeepPacket-SAE & \textsc{Alpine} + \textsc{Palm} & \textsc{Alpine} + \textsc{Maple} & \textsc{Alpine} + \textsc{Date} \\
 \hline
-\end{tabular}
-\begin{tabular} {|p{2cm}|p{0.5cm}p{0.5cm}p{0.5cm}|p{0.5cm}p{0.5cm}p{0.5cm}|p{0.5cm}p{0.5cm}p{0.5cm}|p{0.5cm}p{0.5cm}p{0.5cm}|p{0.5cm}p{0.5cm}p{0.5cm}|}
+\end{tabular}}
+\resizebox{\textwidth}{!}{\begin{tabular} {|p{2cm}|p{0.7cm}p{0.7cm}p{0.7cm}|p{0.7cm}p{0.7cm}p{0.7cm}|p{0.7cm}p{0.7cm}p{0.7cm}|p{0.7cm}p{0.7cm}p{0.7cm}|p{0.7cm}p{0.7cm}p{0.7cm}|}
 \hline
 & \textit{P} & \textit{R} & \textit{F1} & \textit{P} & \textit{R} & \textit{F1} & \textit{P} & \textit{R} & %
 \textit{F1} & \textit{P} & \textit{R} & \textit{F1} & \textit{P} & \textit{R} & \textit{F1} \\
@@ -43,13 +43,13 @@ VoipBuster & 0.99 & 1.00 & 0.99 & 0.99 & 0.99 & 0.99 & 1.00 & 0.98 & 0.99 & 1.00
 Vimeo & 0.99 & 0.99 & \textbf{0.99} & 0.99 & 0.98 & 0.98 & 0.99 & 0.98 & 0.99 & 0.97 & 0.98 & 0.99 & 0.98 & 0.98 & 0.98 \\
 Youtube & 0.99 & 0.99 & \textbf{0.99} & 0.98 & 0.99 & 0.99 & 0.99 & 0.94 & 0.96 & 0.96 & 0.96 & 0.96 & 0.96 & 0.96 & 0.96 \\
 \hline
-\end{tabular}
-\begin{tabular} {|p{2cm}|p{2.3cm}|p{2.4cm}|p{2.3cm}|p{2.4cm}|p{2.3cm}|}
+\end{tabular}}
+\resizebox{\textwidth}{!}{\begin{tabular} {|p{2cm}|p{2.3cm}|p{2.4cm}|p{2.3cm}|p{2.4cm}|p{2.3cm}|}
 \hline
-\textbf{Traffic Type} & DeepPacket-CNN & DeepPacket-SAE & ALPINE+PALM & ALPINE+MAPLE & ALPINE+DATE \\
+\textbf{Traffic Type} & DeepPacket-CNN & DeepPacket-SAE & \textsc{Alpine} + \textsc{Palm} & \textsc{Alpine} + \textsc{Maple} & \textsc{Alpine} + \textsc{Date} \\
 \hline
-\end{tabular}
-\begin{tabular} {|p{2cm}|p{0.5cm}p{0.5cm}p{0.5cm}|p{0.5cm}p{0.5cm}p{0.5cm}|p{0.5cm}p{0.5cm}p{0.5cm}|p{0.5cm}p{0.5cm}p{0.5cm}|p{0.5cm}p{0.5cm}p{0.5cm}|}
+\end{tabular}}
+\resizebox{\textwidth}{!}{\begin{tabular} {|p{2cm}|p{0.7cm}p{0.7cm}p{0.7cm}|p{0.7cm}p{0.7cm}p{0.7cm}|p{0.7cm}p{0.7cm}p{0.7cm}|p{0.7cm}p{0.7cm}p{0.7cm}|p{0.7cm}p{0.7cm}p{0.7cm}|}
 \hline
 & \textit{P} & \textit{R} & \textit{F1} & \textit{P} & \textit{R} & \textit{F1} & \textit{P} & \textit{R} & %
 \textit{F1} & \textit{P} & \textit{R} & \textit{F1} & \textit{P} & \textit{R} & \textit{F1} \\
@@ -66,7 +66,7 @@ VPN: Stream & 1.00 & 1.00 & \textbf{1.00} & 0.99 & 0.99 & 0.99 & 0.99 & 0.99 & 0
 VPN: Torrent & 1.00 & 1.00 & \textbf{1.00} & 0.99 & 0.97 & 0.98 & 0.99 & 0.99 & 0.99 & 0.98 & 0.99 & 0.99 & 0.83 & 1.00 & 0.91 \\
 VPN: VoIP & 0.99 & 1.00 & \textbf{1.00} & 0.99 & 1.00 & 0.99 & 1.00 & 0.98 & 0.99 & 0.99 & 0.98 & 0.99 & 0.99 & 0.98 & 0.99 \\
 \hline
-\end{tabular}
+\end{tabular}}
 \label{tab:vpnresults}
 \caption{Results for classifying VPN data.}
 \end{table*}
@@ -75,12 +75,12 @@ VPN: VoIP & 0.99 & 1.00 & \textbf{1.00} & 0.99 & 1.00 & 0.99 & 1.00 & 0.98 & 0.9
 
 \begin{table*} [ht!]
 \centering
-\begin{tabular} {|p{2cm}|p{2.3cm}|p{2.4cm}|p{2.3cm}|p{2.4cm}|p{2.3cm}|}
+\resizebox{\textwidth}{!}{\begin{tabular} {|p{2cm}|p{2.3cm}|p{2.4cm}|p{2.3cm}|p{2.4cm}|p{2.3cm}|}
 \hline
-\textbf{Application} & DeepPacket-CNN & DeepPacket-SAE & ALPINE+PALM & ALPINE+MAPLE & ALPINE+DATE \\
+\textbf{Application} & DeepPacket-CNN & DeepPacket-SAE & \textsc{Alpine} + \textsc{Palm} & \textsc{Alpine} + \textsc{Maple} & \textsc{Alpine} + \textsc{Date} \\
 \hline
-\end{tabular}
-\begin{tabular} {|p{2cm}|p{0.5cm}p{0.5cm}p{0.5cm}|p{0.5cm}p{0.5cm}p{0.5cm}|p{0.5cm}p{0.5cm}p{0.5cm}|p{0.5cm}p{0.5cm}p{0.5cm}|p{0.5cm}p{0.5cm}p{0.5cm}|}
+\end{tabular}}
+\resizebox{\textwidth}{!}{\begin{tabular} {|p{2cm}|p{0.7cm}p{0.7cm}p{0.7cm}|p{0.7cm}p{0.7cm}p{0.7cm}|p{0.7cm}p{0.7cm}p{0.7cm}|p{0.7cm}p{0.7cm}p{0.7cm}|p{0.7cm}p{0.7cm}p{0.7cm}|}
 \hline
 & \textit{P} & \textit{R} & \textit{F1} & \textit{P} & \textit{R} & \textit{F1} & \textit{P} & \textit{R} & %
 \textit{F1} & \textit{P} & \textit{R} & \textit{F1} & \textit{P} & \textit{R} & \textit{F1} \\
@@ -103,19 +103,19 @@ Vimeo & 0.44 & 0.36 & 0.40 & 0.05 & 0.91 & 0.09 & 0.98 & 0.94 & 0.96 & 0.95 & 0.
 Vuze & -- & -- & -- & -- & -- & -- & 0.98 & 0.72 & 0.83 & 0.97 & 0.73 & \textbf{0.83} & 0.97 & 0.71 & 0.82 \\
 Youtube & -- & -- & -- & -- & -- & -- & 0.95 & 0.94 & 0.94 & 0.94 & 0.95 & 0.95 & 0.94 & 0.96 & \textbf{0.95} \\
 \hline
-\end{tabular}
+\end{tabular}}
 \caption{Results for classifying Tor data by application.}
 \label{tab:torappresults}
 \end{table*}
 
 \begin{table*}[h!]
 \centering
-\begin{tabular} {|p{2cm}|p{2.3cm}|p{2.3cm}|p{2.3cm}|p{2.4cm}|p{2.3cm}|}
+\resizebox{\textwidth}{!}{\begin{tabular} {|p{2cm}|p{2.3cm}|p{2.3cm}|p{2.3cm}|p{2.4cm}|p{2.3cm}|}
 \hline
-\textbf{Traffic Type} & DIDarknet & J48 & ALPINE+PALM & ALPINE+MAPLE & ALPINE+DATE \\
+\textbf{Traffic Type} & DIDarknet & J48 & \textsc{Alpine} + \textsc{Palm} & \textsc{Alpine} + \textsc{Maple} & \textsc{Alpine} + \textsc{Date} \\
 \hline
-\end{tabular}
-\begin{tabular} {|p{2cm}|p{0.5cm}p{0.5cm}p{0.5cm}|p{0.5cm}p{0.5cm}p{0.5cm}|p{0.5cm}p{0.5cm}p{0.5cm}|p{0.5cm}p{0.5cm}p{0.5cm}|p{0.5cm}p{0.5cm}p{0.5cm}|}
+\end{tabular}}
+\resizebox{\textwidth}{!}{\begin{tabular} {|p{2cm}|p{0.7cm}p{0.7cm}p{0.7cm}|p{0.7cm}p{0.7cm}p{0.7cm}|p{0.7cm}p{0.7cm}p{0.7cm}|p{0.7cm}p{0.7cm}p{0.7cm}|p{0.7cm}p{0.7cm}p{0.7cm}|}
 \hline
 & \textit{P} & \textit{R} & \textit{F1} & \textit{P} & \textit{R} & \textit{F1} & \textit{P} & \textit{R} & \textit{F1} & \textit{P} & \textit{R} & %
 \textit{F1} & \textit{P} & \textit{R} & \textit{F1} \\
@@ -129,7 +129,7 @@ P2P & 0.90 & 0.95 & 0.93 & 0.99 & 0.99 & \textbf{0.99} & 0.96 & 0.98 & 0.97 & 0.
 Video & 0.82 & 0.88 & 0.85 & 0.98 & 0.98 & \textbf{0.98} & 0.99 & 0.97 & \textbf{0.98} & 0.98 & 0.98 & \textbf{0.98} & 0.98 & 0.98 & \textbf{0.98} \\
 VOIP & 0.58 & 0.61 & 0.59 & 0.99 & 0.99 & \textbf{0.99} & 0.72 & 0.97 & 0.83 & 0.82 & 0.96 & 0.89 & 0.71 & 0.99 & 0.82 \\
 \hline
-\end{tabular}
+\end{tabular}}
 \label{tab:tortrafficresults}
 \caption{Results for classifying Tor data by traffic type.}
 \end{table*}
@@ -173,7 +173,7 @@ Standard & 0.99 & 0.99 & 0.99 & 0.99 & 0.99\\
 \end{table}
 
 \subsection{Plaintext Traffic over HTTPS}
-Our next experiment was to assess the ability of the model to determine if traffic samples on port 443 are truly encrypted packets (TLS) or not. Many firewalls are configured to default-allow port 443 traffic; an attacker may send any content or malware over this port in order to attempt to bypass a firewall. Senders wishing to bypass middlebox technology may send non-TLS data over port 443 to avoid detection. It is thus significant for surveillance and law enforcement operations to monitor traffic on port 443 for non-encrypted data which may be decipherable. IoT devices also can send unencrypted traffic over port 443~\cite{wood2017cleartext} which may contain some useful information. Alice finds it incredibly useful to capture all plaintext data where possible as it can contribute to the legal summation of a case. We created two classes of encrypted and non-encrypted traffic, performed random under-sampling, and ran the model, generating results in Figure~\ref{fig:enccompressed}. The model tends to overselect traffic as encrypted, and underselect traffic which is plaintext. This is not surprising due to the variety of features present in the single plaintext category, versus the lack of common features generally found or uncovered in the encrypted class. In this case, model design may not be well-suited to a binary classification problem because the class \textit{plaintext} is not well-defined. This tuning factor should be considered by users of the \textsc{Forager} system during the configuration process.
+Our next experiment was to assess the ability of the model to determine if traffic samples on port 443 are truly encrypted packets (TLS) or not. Many firewalls are configured to default-allow port 443 traffic; an attacker may send any content or malware over this port in order to attempt to bypass a firewall. Senders wishing to bypass middlebox technology may send non-TLS data over port 443 to avoid detection. It is thus significant for surveillance and law enforcement operations to monitor traffic on port 443 for non-encrypted data which may be decipherable. IoT devices also can send unencrypted traffic over port 443~\cite{wood2017cleartext} which may contain some useful information. Alice finds it incredibly useful to capture all plaintext data where possible as it can contribute to the legal summation of a case. We created two classes of encrypted and non-encrypted traffic, performed random under-sampling, and ran the model, generating results in Figures~\ref{fig:tlsnontls}, \ref{fig:tlscomp}, and \ref{fig:comptype}. The model tends to overselect traffic as encrypted, and underselect traffic which is plaintext. This is not surprising due to the variety of features present in the single plaintext category, versus the lack of common features generally found or uncovered in the encrypted class. In this case, model design may not be well-suited to a binary classification problem because the class \textit{plaintext} is not well-defined. This tuning factor should be considered by users of the \textsc{Forager} system during the configuration process.
 
 \subsection{Compressed Traffic over HTTPS}
 Compressed versus encrypted traffic both tend to exhibit highly entropic behavior, with the data approaching uniform distribution in more advanced implementations~\cite{hedge}. An attacker may run compressed data over port 443 (or any port) and middleware technology may assume it is encrypted if using statistical tests like Chi-squared or Shannon entropy~\cite{gaspari2020encod}. Instead, Alice could use our system to isolate compressed traffic from encrypted traffic, and thus be able to decompress and process that information in follow-on applications. In order to run this experiment, we first ran compression algorithms on the payloads of FTP\_DATA packets. We chose this traffic type as the payloads are largely text-based and often sent compressed over the wire. We used three standard compression libraries - \texttt{gzip}, \texttt{zlib}, and \texttt{bz2}. The packets were randomly divided into groups, producing 10,519 sample compressed payloads of each type. The encrypted traffic from the ISCX 2016 VPN-nonVPN dataset~\cite{iscx-vpn-paper} was used for the encrypted traffic type. Figure~\ref{fig:tlscomp} shows \textsc{Forager} is capable of identifying compressed from encrypted traffic on port 443 or out of any stream (using \textsc{Alpine} and \textsc{Maple}). Furthermore, we can profile down to specific compression type with great accuracy in Figure~\ref{fig:comptype}. We can also identify plaintext traffic in Figure~\ref{fig:tlsnontls}. Alice could use this technology to extract compressed data streams and decompress them for further analysis.

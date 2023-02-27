@@ -1,7 +1,8 @@
 \section{Methodology}
+Details of the network traffic classification systems used in Forager can be found in previous chapters of this work. In addition to technical methods, we provide practical application through analysis of threat models for which \textsc{Forager} is useful.
 
-\subsection{Threat Models}
-To bring the problem to life, we envision a criminal case in our threat model. Bob is a member of an organization embezzling funds through an international shipping company. There are several nefarious tasks which Bob needs to accomplish that he could utilize port 443 exploitations to achieve:
+\subsection{Threat Model}
+To bring the problem to life, we envision a criminal case in our \textit{\textbf{threat model}}. Bob is a member of an organization embezzling funds through an international shipping company. There are several nefarious tasks which Bob needs to accomplish that he could utilize port 443 exploitations to achieve:
 \begin{itemize}
 \item Create a \textbf{\textit{covert data channel}} in order to pass along sensitive information like receipts and records while avoiding detection,
 \item \textbf{\textit{Communicate anonymously}} with criminal network colleagues to avoid tracing of colleagues, his own geolocation data, and evidence,
@@ -41,7 +42,7 @@ The \textsc{Forager} system is a highly adaptable traffic profiling multi-tool c
 \label{fig:forager}
 \end{figure}
 
-In the training phase, data is passed in with a label and indexed respective to class. This index is stored in a lookup table inside \textsc{Forager}. Models are enabled or disabled and given a number of votes $m$ per model. This allows the user to more heavily weight one model's opinion over another, further contributing to the flexibility in real deployments. A few additional hyperparameters may be configured for the neural network models such as epochs for training, and data is processed and weights may be saved for later use. In the testing phase, test data is processed in a similar manner and the input passed through the classifier. Forager amalgamates the votes across models and uses its lookup table to return a classification result. In a real packet processing pipeline, we could add this result as part of metadata or an encapsulation header for the packet for downstream processing. The current implementation generates a report of classification results which may be returned to an administrator for further review and possible identification of traffic on non-standard or unexpected ports which could be malicious.
+In the training phase, data is passed in with a label and indexed respective to class. This index is stored in a lookup table inside \textsc{Forager}. Models are enabled or disabled and given a number of votes $m$ per model. This allows the user to more heavily weight one model's opinion over another, further contributing to the flexibility in real deployments. A few additional hyperparameters may be configured for the neural network models such as epochs for training, and data is processed and weights may be saved for later use. In the testing phase, test data is processed in a similar manner and the input passed through the classifier. \textsc{Date} amalgamates the votes across models and uses its lookup table to return a classification result. In a real packet processing pipeline, we could add this result as part of metadata or an encapsulation header for the packet for downstream processing. The current implementation generates a report of classification results which may be returned to an administrator for further review and possible identification of traffic on non-standard or unexpected ports which could be malicious.
 
 \subsection{Datasets}
 To create a pipeline of data representative of a diverse capture on port 443, we utilized several public datasets created by and widely used in the research community for network traffic classification.

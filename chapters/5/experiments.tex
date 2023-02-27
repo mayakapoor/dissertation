@@ -12,7 +12,7 @@ We ran several experiments to test the model's ability for binary RTP/non-RTP de
 
 \subsection{RTP Detection}
 
-For the binary RTP/non-RTP classification, we re-labeled all non-RTP and non-SRTP traffic as \textit{non-RTP}, and merged SRTP and RTP traffic into an \textit{RTP} label. For testing the different configurations of the \textsc{Maple} model, traffic was first processed and transformed into a matrix image, and then used as input for each of the models. We performed random under-sampling to avoid bias in the dataset, and then split the data into 60\%/40\% for training and testing. First, in order to establish a baseline we ran the multi-model using \textsc{Alpine} and \textsc{Palm} with the same datasets with the results in Table~\ref{tab:rtpresultslsh}. We ran tests with training for $3$ epochs for each CNN model. As we plan to deploy this technology in a real RTP detection and deep packet inspection system, we also measured classification throughput in order to determine how much traffic the \textsc{Maple} system would be able to process given the detection model configuration. Results are provided in Table~\ref{tab:binaryresults}.
+For the binary RTP/non-RTP classification, we re-labeled all non-RTP and non-SRTP traffic as non-RTP, and merged SRTP and RTP traffic into an RTP label. For testing the different configurations of the \textsc{Maple} model, traffic was first processed and transformed into a matrix image, and then used as input for each of the models. We performed random under-sampling to avoid bias in the dataset, and then split the data into 60\%/40\% for training and testing. First, in order to establish a baseline we ran the multi-model using \textsc{Alpine} and \textsc{Palm} with the same datasets with the results in Table~\ref{tab:rtpresultslsh}. We ran tests with training for $3$ epochs for each CNN model. As we plan to deploy this technology in a real RTP detection and deep packet inspection system, we also measured classification throughput in order to determine how much traffic the \textsc{Maple} system would be able to process given the detection model configuration. Results are provided in Table~\ref{tab:binaryresults}.
 
 \begin{table} [h!]
 \centering
@@ -142,6 +142,15 @@ Model & P & R & F1 & Accuracy \\
 \end{table}
 
 Increasing the training time for the LeNet model showed significant improvement in accuracy, but not likely to a level needed for deployed systems so there is a need to build upon the baseline. The ResNet model approaches better accuracy with more training time.
+
+\subsection{User Fingerprinting}
+In order to test capability to track user streams, we isolated a source/destination IP pair in the traffic and created a separate user label for it. In this way, we associate a particular traffic stream with a person of interest. Then, we configured \textsc{Maple} and a multimodal version of \textsc{Alpine} to use no network layer features, and instead rely on packet length, flags, and analysis of payload contents and spatial features to make the classification. Results in Figure~\ref{fig:userbob} show this approach as a promising solution for tracking user streams across changing network configurations.
+
+\begin{figure} [ht!]
+\includegraphics[width=\linewidth]{chapters/5/img/userbob.png}
+\caption{A confusion matrix of tracking user Bob across traffic streams in a changing network environment.}
+\label{fig:userbob}
+\end{figure}
 
 \subsection{Model Performance and Throughput}
 Decreasing the number of kernels may have slightly impacted accuracy, but improved overall throughput significantly and lessens memory footprint. In a real network environment, it may be worth consideration to sacrifice some accuracy in order to be able to monitor more traffic or more effectively load-balance the received input depending on hardware capability. Thus, the ideal model configuration is often environment-dependent and inspired us to incorporate configuration capability in \textsc{Maple} so that the deployed system may best suit the environment. We provide the throughput of each model configuration in our experiments in Table~\ref{tab:binarythroughput}.

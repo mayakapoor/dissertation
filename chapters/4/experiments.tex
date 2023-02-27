@@ -1,4 +1,4 @@
-\section{Experiments and Results}
+\textsc{Alpine}\section{Experiments and Results}
 \begin{table} [ht!]
 \caption{Description of Combined Dataset}
 \centering
@@ -121,16 +121,16 @@ RFCs and standardized documentation necessitate that there are some detectable s
 \end{figure}
 
 \subsection{TF-IDF Score Evaluation}
-In order to determine the effectivity of Jaccard similarity versus more complex similarity metrics, we evaluated the results of using payload tokens which were considered \textit{high-value} by TF-IDF score. We posed this question to address concern that large data payloads, for example HTML documents or email messages, may introduce noise into hashes which would reduce classification accuracy. Instead, isolating payload tokens to only the high value ones could reduce spurious extra data. In order to test this, we implemented a TF-IDF measurement of tokens in the training stage. This was done by modifying configurations of the PALM model to filter the added tokens. When training and test signatures were generated, only those tokens with TF-IDF score above the minimum threshold were kept and included in the actual LSH signature. The results in Table~\ref{table:results1} show that this actually had a negative impact on the overall result, indicating the basic Jaccard similarity was a better distance metric for this use case.
+In order to determine the effectivity of Jaccard similarity versus more complex similarity metrics, we evaluated the results of using payload tokens which were considered high-value by TF-IDF score. We posed this question to address concern that large data payloads, for example HTML documents or email messages, may introduce noise into hashes which would reduce classification accuracy. Instead, isolating payload tokens to only the high value ones could reduce spurious extra data. In order to test this, we implemented a TF-IDF measurement of tokens in the training stage. This was done by modifying configurations of the \textsc{Palm} model to filter the added tokens. When training and test signatures were generated, only those tokens with TF-IDF score above the minimum threshold were kept and included in the actual LSH signature. The results in Table~\ref{table:results1} show that this actually had a negative impact on the overall result, indicating the basic Jaccard similarity was a better distance metric for this use case.
 
-\subsection{LSH Multi-Embeddings}
+\subsection{Multi-Embeddings}
 
 \begin{table}
 \caption{Multi-Hash Embedding Classification Results}
 \centering
 \begin{tabular}{| p{2cm} | p{0.6cm} p{0.6cm} p{0.6cm} || p{0.6cm} p{0.6cm} p{0.6cm} || p{0.6cm} p{0.6cm} p{0.6cm}|}
 \hline
-& \textbf{ALPINE} & & & \textbf{PALM} & & & \textbf{Multi-Model} & & \\
+& \textbf{\textsc{Alpine}} & & & \textbf{\textsc{Palm}} & & & \textbf{Multi-Model} & & \\
 \hline
 \hline
 \textbf{Accuracy} & 0.988 & & & 0.717 & & & 0.996 & & \\
@@ -178,12 +178,12 @@ One critical requirement for applied machine learning in network processing is t
 \begin{table*} [ht!]
 \caption{Performance Results for Varied Number of Classes}
 \centering
-\begin{tabular}{| c | c | c | c | c | c | c | c |}
+\begin{tabular}{| p{0.11\linewidth} | p{0.1\linewidth} | p{0.1\linewidth} | p{0.1\linewidth} | p{0.1\linewidth} | p{0.1\linewidth} | p{0.15\linewidth} | p{0.1\linewidth} |}
 \hline
-Classes & \# Hashes & \# Test Samples & Training Time & Test Time & Memory Usage & Throughput & Accuracy \\
+Classes & \# Hashes & \# Samples & Training Time & Test Time & Memory Usage & Throughput & Accuracy \\
 \hline
 \hline
-\textbf{RTP/non-RTP} & 20,613 & 13,743 & 4.273s & 1.21ms & 470.8 MiB & 2.596 Mb\/s & 1.000 \\
+\textbf{RTP/ non-RTP} & 20,613 & 13,743 & 4.273s & 1.21ms & 470.8 MiB & 2.596 Mb\/s & 1.000 \\
 \textit{Binary classification} & 2,400 & 1,600 & 0.738s & 0.866ms & 283.7 MiB & 3.139 Mb\/s & 0.997 \\
 & 240 & 160 & 0.075s & 1.093ms & 353.4 MiB & 2.317 Mb\/s & 1.00 \\
 \hline
@@ -208,7 +208,7 @@ In order to test system scalability in deployment and verify the theoretical com
 System & \# Signatures & Training & Testing & Memory \\
 \hline
 \hline
-\textbf{ALPINE/PALM} & 1,000 &  1.21s &  1.23s & 392.4 MiB \\
+\textbf{\textsc{Alpine}/\textsc{Palm}} & 1,000 &  1.21s &  1.23s & 392.4 MiB \\
 & 10,000 & 2.75s & 3.56s & 419.9 MiB \\
 & 100,000 & 52.75s & 4.2s & 1047.4 MiB \\
 & 1,000,000 & 423.3s & 4.52s & 4717.9 MiB \\

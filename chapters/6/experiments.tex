@@ -54,7 +54,7 @@ Class & P & R & F1 \\
 \end{table}
 
 \subsection{H.225 Detection}
-A similar detection problem exists for H.225 signaling protocol, which handles the registration and call setup for certain VoIP architectures using the H.323 protocol suite. Like RTP, the H.225 data may arrive to an endpoint first before the H.323 data, and also suffers from a weak signature. Thus, we additionally tested \textsc{DATE}'s ability to detect H.225 traffic from non-H.225 traffic. Our setup of the dataset labels and the DBSCAN configuration was similar to the RTP test and results are given in Table~\ref{tab:h225results}. The performance of the LSH models is provided in Table~\ref{tab:h225resultslsh} for a baseline.
+A similar detection problem exists for H.225 signaling protocol, which handles the registration and call setup for certain VoIP architectures using the H.323 protocol suite. Like RTP, the H.225 data may arrive to an endpoint first before the H.323 data, and also suffers from a weak signature. Thus, we additionally tested \textsc{Date}'s ability to detect H.225 traffic from non-H.225 traffic. Our setup of the dataset labels and the DBSCAN configuration was similar to the RTP test and results are given in Table~\ref{tab:h225results}. The performance of the LSH models is provided in Table~\ref{tab:h225resultslsh} for a baseline.
 
 \begin{table} [h!]
 \centering
