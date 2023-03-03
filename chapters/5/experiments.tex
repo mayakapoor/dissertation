@@ -147,7 +147,8 @@ Increasing the training time for the LeNet model showed significant improvement 
 In order to test capability to track user streams, we isolated a source/destination IP pair in the traffic and created a separate user label for it. In this way, we associate a particular traffic stream with a person of interest. Then, we configured \textsc{Maple} and a multimodal version of \textsc{Alpine} to use no network layer features, and instead rely on packet length, flags, and analysis of payload contents and spatial features to make the classification. Results in Figure~\ref{fig:userbob} show this approach as a promising solution for tracking user streams across changing network configurations.
 
 \begin{figure} [ht!]
-\includegraphics[width=\linewidth]{chapters/5/img/userbob.png}
+\centering
+\includegraphics[scale=0.7]{chapters/5/img/userbob.png}
 \caption{A confusion matrix of tracking user Bob across traffic streams in a changing network environment.}
 \label{fig:userbob}
 \end{figure}

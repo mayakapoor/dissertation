@@ -42,7 +42,7 @@
 % Doctype should be either dissertation proposal, dissertation, or thesis.
 % If you're getting a master's, specify "thesis" below.
 % If you're getting a PhD, specify "dissertation" below.
-\doctype{dissertation}
+\doctype{dissertation proposal}
 %%%%%%%%%%%%%%%%     IMPORTANT! IMPORTANT! IMPORTANT! %%%%%%%%%%%%%%%%
 % The rules below MUST be followed for the abstract page and chapter titles
 % to be correctly formatted.
@@ -54,7 +54,7 @@
 \title{Data Mining and Deep Learning Systems for Network Traffic Classification and Characterization at Scale}
 \author{Maya Kapoor}
 \degree{Doctor of Philosophy}
-\major{Computing and Information Systems, Software and Information Systems Track}
+\major{Computing and Information Systems}
 \publicationyear{2023}
 
 \advisorOne{Dr. Siddharth Krishnan}
@@ -72,16 +72,11 @@
 \maketitlepage
 \makecopyright
 \begin{abstract}
-You must have an abstract. The content of your abstract goes here.
-
-You should compose the abstract using the conventions of your field. In many fields this section is typically 1-2 pages.\end{abstract}
+The real, complex network environment consists of an ever-increasingly diverse and large amount of data encapsulated in packets. Surveillance and monitoring of this traffic is a necessary task for law enforcement, cybersecurity, and intelligence agencies. Intercepted network traffic must be classified into multiple categories, such as the protocol encapsulation layers contained, application it originates from, user generating the traffic, and the traffic's malicious or benign nature. Deep packet inspection (DPI) is this process of analyzing and identifying packet payload and header features. Measures such as encryption, compression, spoofing, and tunneling architectures can render traditional DPI techniques ineffective. This causes traffic to be undetected and unmonitored and can therefore pose a threat to vulnerable systems if malicious or may contain missing, critical information for investigation or intelligence. There is a lack of solutions which are able to classify packets individually without flow-based features. The buffering of traffic flows does not scale to large networks. Thus, a system is needed to perform best-effort classification in the single packet case for higher throughput. In order to address the gaps in current traffic classification and DPI techniques, we propose a DPI framework consisting of tools to extract hidden representations from individual packets and use these features in deep learning models to perform traffic classification. This dissertation presents the initial release of the Forager toolkit, a software which is capable of extracting header fields from packets and their payload contents. It uses data mining techniques to perform automatic generation of regular expression signatures, locality-sensitive hash fingerprints, and matrix and point cloud representations of packets. These are used as input features for corresponding deep learning models which can perform traffic classification on single packets in a real system. The models are multi-modal to capture multiple angles and dimensions of features for increased complexity of classification problems. They can be run in parallel for optimal throughput and scalability. Our experiments use these models in multiple configurations and scenarios to demonstrate superior performance and classification capability to advance the state of the art in complex network traffic surveillance and hidden representation learning.
+\end{abstract}
 %\begin{dedication}
-%If you decide to have a dedication page, your dedication text would
-%go here.
 
-%The Dedication page, if used, pays a special tribute to a person(s)
-%who has given extraordinary encouragement or support to one's academic
-%career.\end{dedication}
+%\end{dedication}
 %\begin{acknowledgements}
 %If you decide to have a acknowledgements page, your acknowledgement
 %text would go here.
@@ -123,13 +118,9 @@ You should compose the abstract using the conventions of your field. In many fie
 \pagenumbering{arabic}
 % 2 inch top spacing for new chapters
 \bodychapterformat
-\begin{preface}
-If you decide to have an introduction page, your introduction text
-would go here.
-
-Depending on the discipline or the requirements of the student's advisory
-committee, a preface may be included as a preliminary page.
-\end{preface}
+%\begin{preface}
+%The views expressed in this article do not necessarily represent the views of any agency or department of %the United States. This work was not sponsored or endorsed by the US government.
+%\end{preface}
 
 \chapter{INTRODUCTION}
 \input{chapters/introduction/intro}
