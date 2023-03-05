@@ -72,7 +72,27 @@
 \maketitlepage
 \makecopyright
 \begin{abstract}
-The real, complex network environment consists of an ever-increasingly diverse and large amount of data encapsulated in packets. Surveillance and monitoring of this traffic is a necessary task for law enforcement, cybersecurity, and intelligence agencies. Intercepted network traffic must be classified into multiple categories, such as the protocol encapsulation layers contained, application it originates from, user generating the traffic, and the traffic's malicious or benign nature. Deep packet inspection (DPI) is this process of analyzing and identifying packet payload and header features. Measures such as encryption, compression, spoofing, and tunneling architectures can render traditional DPI techniques ineffective. This causes traffic to be undetected and unmonitored and can therefore pose a threat to vulnerable systems if malicious or may contain missing, critical information for investigation or intelligence. There is a lack of solutions which are able to classify packets individually without flow-based features. The buffering of traffic flows does not scale to large networks. Thus, a system is needed to perform best-effort classification in the single packet case for higher throughput. In order to address the gaps in current traffic classification and DPI techniques, we propose a DPI framework consisting of tools to extract hidden representations from individual packets and use these features in deep learning models to perform traffic classification. This dissertation presents the initial release of the Forager toolkit, a software which is capable of extracting header fields from packets and their payload contents. It uses data mining techniques to perform automatic generation of regular expression signatures, locality-sensitive hash fingerprints, and matrix and point cloud representations of packets. These are used as input features for corresponding deep learning models which can perform traffic classification on single packets in a real system. The models are multi-modal to capture multiple angles and dimensions of features for increased complexity of classification problems. They can be run in parallel for optimal throughput and scalability. Our experiments use these models in multiple configurations and scenarios to demonstrate superior performance and classification capability to advance the state of the art in complex network traffic surveillance and hidden representation learning.
+The real, complex network environment consists of an ever-increasingly diverse and
+large amount of data encapsulated in packets. Surveillance and monitoring of this
+traffic is a necessary task for law enforcement, cybersecurity, and intelligence
+agencies. Intercepted network traffic must be classified into multiple categories,
+such as the protocol encapsulation layers contained, application it originates from,
+user generating the traffic, and the traffic's malicious or benign nature. There is a
+lack of solutions which are able to classify packets individually without flow-based
+features. In order to address the gaps in current traffic classification and DPI
+techniques, we propose the initial release of the \textsc{Forager} toolkit, a software
+consisting of tools to extract hidden representations from individual packets and use
+these features in deep learning models to perform traffic classification. It uses data
+ mining techniques to perform automatic generation of regular expression signatures,
+locality-sensitive hash fingerprints, and matrix and point cloud representations of
+packets. These are used as input features for corresponding deep learning models which
+ can perform traffic classification on single packets in a real system. The models are
+ multi-modal to capture multiple angles and dimensions of features for increased
+complexity of classification problems. They can be run in parallel for optimal
+throughput and scalability. Our experiments use these models in multiple
+configurations and scenarios to demonstrate superior performance and classification
+capability to advance the state of the art in complex network traffic surveillance and
+ hidden representation learning.
 \end{abstract}
 %\begin{dedication}
 
