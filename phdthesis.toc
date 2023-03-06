@@ -41,7 +41,7 @@
 \contentsline {subsection}{\numberline {4.4.1}Protocol Auto Detection}{42}{}%
 \contentsline {subsection}{\numberline {4.4.2}Traffic Type}{42}{}%
 \contentsline {subsection}{\numberline {4.4.3}TF-IDF Score Evaluation}{44}{}%
-\contentsline {subsection}{\numberline {4.4.4}Multi-Embeddings}{47}{}%
+\contentsline {subsection}{\numberline {4.4.4}Multi-Embeddings}{45}{}%
 \contentsline {subsection}{\numberline {4.4.5}Model Performance and Throughput}{47}{}%
 \contentsline {section}{\numberline {4.5}Discussion and Limitations}{49}{}%
 \contentsline {chapter}{\numberline {5}MAPLE - IMAGE REPRESENTATION AND RECOGNITION OF INTERNET TRAFFIC}{56}{}%
