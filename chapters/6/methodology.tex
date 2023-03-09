@@ -1,19 +1,9 @@
 \section{Methodology}
 
-\textsc{Date} describes the density-based clustering analysis which is a novel contribution of this work; we also present \textsc{Date} in the context of a larger packet processing system for real AI applications.
+\textsc{Date} describes the density-based clustering analysis which is a novel contribution of this work. This process attempts to map data to a three-dimensional space, then use spatial features to generate hidden features.
 
 \subsection{Point Cloud Creation}
-Point clouds are a set of Cartesian coordinates $(x, y, z)$ which represent some points in a three-dimensional space. In computer vision, point clouds may be used as a method for mapping high-dimensional shapes into lower-dimensioned space~\cite{Wang_2019_ICCV}. This latent representation is often used in a temporal sense to express the movement of objects in three-dimensional space. For example, a car may be modeled as a 3D point cloud, and its movement in space described as a series of clouds ${c_0, c_1,...,c_t}$ where $t$ represents a number of time intervals and $c_n$ the point cloud generated at a given time slice. Unlike time-series based approaches which would require traffic flow data, we emulate the work of Quach et al~\cite{Quach2020compression} and treat the point clouds as static, analagous to manifolds in three dimensional space. This captures a geometrical representation of packet data which we use for cluster analysis.
-
-In the \textsc{Date} model, payload data is extracted from the packets and truncated to 1024 bytes. In cases where the payload is shorter than 1024, we add padding to normalize the input size. We convert the byte values $v$ to decimal values $v' \in [0,255]$. A sliding window technique is then used to create three-dimensional points in our feature space. We map each byte to a value in the $(x, y, z)$ coordinate. The coordinates are mapped to a three-dimensional space to form point clouds like Figure~\ref{fig:cloud}. We expect that packets with similar data will thus result in similar point clouds.
-
-For example, the byte string, `0x68', `0x65', `0x6c', `0x6c', `0x6f', would first be transformed to decimal values (104, 101, 108, 108, 111). Then, the sliding window would produce the points corresponding to coordinates
-\begin{equation}
-\begin{split}
-     C =
-\{(104, 101, 108), \\ (101, 108, 108), \\ (108, 108, 111)\}.
-\end{split}
-\end{equation}
+Point clouds are a set of Cartesian coordinates $(x, y, z)$ which represent some points in a three-dimensional space. Point clouds may be used in computer vision software as a method for mapping high-dimensional shapes into lower-dimensional space~\cite{Wang_2019_ICCV}. As a latent representation, this method can be used temporally to express the movement of objects in three-dimensional space. An airplane can be modeled as a three-dimensional point cloud, and its movement described as a series of clouds ${c_0, c_1,...,c_t}$ where $t$ represents a number of time intervals and $c_n$ the point cloud generated at a given time slice. Like the work of Quach et al~\cite{Quach2020compression}, we do not combine multiple representations in a time series but instead analyze the static representations much analagous to manifolds in three-dimensional space. We use the geometrical representation captured here for cluster analysis.
 
 \begin{figure} [ht!]
 \centering
@@ -22,9 +12,20 @@ For example, the byte string, `0x68', `0x65', `0x6c', `0x6c', `0x6f', would firs
 \label{fig:cloud}
 \end{figure}
 
+In the \textsc{Date} model, payload data is extracted from the packets and truncated to 1024 bytes. If the payload is shorter than this, we add padding for normalization. Byte values $v$ are converted to decimal values $v' \in [0,255]$. For example, the byte string, `0x68', `0x65', `0x6c', `0x6c', `0x6f', would first be transformed to decimal values (104, 101, 108, 108, 111). Then, the sliding window would produce the points corresponding to coordinates:
+\begin{equation}
+\begin{split}
+     C =
+\{(104, 101, 108), \\ (101, 108, 108), \\ (108, 108, 111)\}.
+\end{split}
+\end{equation}
+
+The coordinates are mapped to a three-dimensional space to form point clouds like Figure~\ref{fig:cloud}. We expect that similar point clouds will be generated from packets with similar data.
+
+
 \subsection{Density-Based Spatial Clustering of Applications With Noise (DBSCAN)}
 
-Density-Based Spatial Clustering of Applications with Noise (DBSCAN) uses three different point classifications (see Figure~\ref{fig:dbscan}): \textit{Core points} represent centers of clusters and points are labeled as such based on the number of neighbors they have compared to their neighbors. \textit{Border points} represent the edges and possess the least number of neighbors but are still within the range of a core point. Noise or \textit{Outlier points} are neither borders nor cores and do not belong to a cluster. The DBSCAN algorithm visits each point and classifies them as such in order to paint a picture of where clusters of data are~\cite{schubert2017dbscan}.
+Density-Based Spatial Clustering of Applications with Noise (DBSCAN) uses three different point classifications. \textit{Core points} make up the centers of clusters. Individual core points are labeled based on the number of neighbors they have compared to their neighbors, or their degree of importance. \textit{Border points} are those which have the least number of neighbors but are still comparatively relevant due to being within the range of a core point. These comprise the edges of the point cloud. \textit{Outlier points} are neither borders nor cores, do not belong to a cluster, and are considered noise~\cite{schubert2017dbscan}. The DBSCAN algorithm visits each point and classifies them as such in order to paint a picture of where clusters of data are as in Figure~\ref{fig:dbscan}.
 
 \begin{figure} [ht!]
 \centering
@@ -33,13 +34,13 @@ Density-Based Spatial Clustering of Applications with Noise (DBSCAN) uses three 
 \label{fig:dbscan}
 \end{figure}
 
-After the point clouds are created, we process them using the DBSCAN algorithm in order to determine natural clusters that exist in the provided classes in the ground truth. DBSCAN works by grouping points that are close together utilizing a Euclidean distance for measurements. Thresholds exist in the algorithm to specify the minimum number of points needed to create a cluster and the value of the Euclidean distance that determines if points are close enough to make a cluster. We configure two parameters in the algorithm: $\epsilon$ and a minimum number of samples. The $\epsilon$ value is the radius for each circle drawn around each point to query density, and the minimum number of samples is the minimum number of points required to be inside the drawn circle for it to be considered a Core point.
+We first create the point clouds and then process them using DBSCAN in order to derive the natural clusters that exist in the data. DBSCAN groups points that are close together utilizing a Euclidean distance for measurements. The value of the Euclidean distance that determines proximity and the minimum number of points needed to form a cluster are configurable parameters: $\epsilon$ and a minimum number of samples. The $\epsilon$ value is the radius for each circle drawn around each point to query density, and the minimum number of samples is the minimum number of points required to be inside the drawn circle for it to be considered a Core point.
 
-The minimum number of samples must at least be the number of dimensions, and as a heuristic, it is generally twice the dimensions. All tests were performed with the DBSCAN configuration of $\epsilon$ = 7 and \texttt{min\_samples} = 7. Having a baseline of 7 points to make a cluster within a 3D dimensional plane would be forgiving enough to create more clusters in a lower populated point cloud. An $\epsilon$ value of 7 should also allow for a greater number of clusters to be recognized~\cite{rahmah2016determination}.
+Generally, the number of samples is twice the dimensions, but it must be at least the number of dimensions. If it is set below this threshold, then singular points or two points that are close together would constitute a cluster, which would not be an accurate way of determining where data is clumped~\cite{mullin2020tuning}. In our experiments, we configured DBSCAN to perform with $\epsilon$ = 7 and \texttt{min\_samples} = 7. This would be enough to create more clusters in a less populated point cloud. An $\epsilon$ value of 7 also allowed for a greater number of recognizable clusters~\cite{rahmah2016determination}.
 
-Tuning DBSCAN has the potential to uncover great performance when it comes to creating recognizable clouds within the 3D space. As stated earlier, two inputs to DBSCAN can be tuned: $\epsilon$ and \texttt{min\_samples}. It is important to have these values set reasonably to see favorable results. As a rule of thumb, the minimum number of samples needed to classify a cluster should be set to at least the number of dimensions. If it is set below this threshold, then singular points or two points that are close together would constitute a cluster, which would not be an accurate way of determining where data is clumped~\cite{mullin2020tuning}.
+Like many machine learning models, the parameters used to tune DBSCAN greatly affect performance rates. It is possible to create more clearly defined point clouds within the three-dimensional space through this parameter adjustments. The $\epsilon$ value needs to be set based on general rules. If the value of $\epsilon$ chosen is too small then too many clusters will be created which over-emphasize the importance of noisy points. However, if set too large, then clusters will merge together and shapes become less distinct. One way that a value of $\epsilon$ can be estimated is by examining the input data and finding the average distance between each point and its $K$-nearest neighbors. Choosing an exact value for $\epsilon$ is a difficult problem for packet data which is highly variable. The $\epsilon$ value must be estimated from a conglomeration of the packet's $K$-nearest neighbors where $K$ is equal to \texttt{min\_samples}.
 
-Similarly, $\epsilon$ needs to be set based on general rules. If the value of $\epsilon$ chosen is too small then more clusters will be created, and more data points will be taken as noise. However, if set too large, then a number of smaller clusters will be more likely to merge into one large cluster. One way that a value of $\epsilon$ can be estimated is by examining the input data and finding the average distance between each point and its k nearest neighbors. Because each packet is highly variable, choosing an exact value for $\epsilon$ is a difficult problem. An estimation of $\epsilon$ must be taken from a conglomeration of the packet's $k$-nearest neighbors data where $k$ is the value of \texttt{min\_samples} chosen. As shown in the figure above, the point of each line with the greatest curvature is considered the ideal value for $\epsilon$. A line has been illustrated in Figure~\ref{fig:kneighborsgraph} where an estimated average is made for every sample. The variation in an ideal $\epsilon$ value could be a major factor in why some packets are recognizable in their cloud state and others are not~\cite{rahmah2016determination}.
+Because each packet is highly variable, choosing an exact value for $\epsilon$ is a difficult problem. An estimation of $\epsilon$ must be taken from a conglomeration of the packet's $k$-nearest neighbors data where $k$ is the value of \texttt{min\_samples} chosen. As shown in the figure above, the point of each line with the greatest curvature is considered the ideal value for $\epsilon$. A line has been illustrated in Figure~\ref{fig:kneighborsgraph} where an estimated average is made for every sample. The variation in an ideal $\epsilon$ value could be a major factor in why some packets are recognizable in their cloud state and others are not~\cite{rahmah2016determination}.
 
 We extract the following features as the feature vector for classification from the DBSCAN results:
 \begin{itemize}

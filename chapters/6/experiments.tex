@@ -1,6 +1,6 @@
 \section{Experiments and Results}
 
-We experimented with the RTP detection problem that was previously attempted with the \textsc{Maple} model in chapter 5 in order to assess the ability to detect weakly signatured data. Then, we extend this to H.225 detection, which is a similarly weakly signatured data transfer protocol. Lastly, the model performance and throughput is assessed for its application to deep packet inspection and deep learning at scale.
+We experimented with the RTP detection problem that was previously attempted with the \textsc{Maple} model in chapter 5 in order to assess the ability to detect weakly signatured data. Then, we extend this to H.225 detection, which is another data transfer protocol with a weak signature. Lastly, the model performance and throughput is assessed for its application to deep packet inspection and deep learning at scale.
 
 All tests were performed on a single CPU of a 1.6 GHz dual-core Intel i5 processor with 16 GB DDR3 RAM. In the binary confusion matrix, true positive (TP) indicates correct classification of data as RTP. True negative (TN) is correct classification of data as non-RTP. false negative (FN) implies incorrect identification of traffic as non-RTP, and false positive (FP) is the incorrect classification of data as RTP. We use measurements of precision, recall, and F1-score for model evaluation, defined as follows:
 \begin{equation}
@@ -11,10 +11,10 @@ All tests were performed on a single CPU of a 1.6 GHz dual-core Intel i5 process
     \end{split}
 \end{equation}
 
-Epochs represent the number of passes made over the training data in order for the neural network to fine tune itself under supervision. Although more epochs does not guarantee better performance, it is observed that a larger number of epochs within reason is a good method to improving metric results. All tests were performed with undersampling to appropriately balance the dataset, and a 60/40 training and test split.
+All tests were performed with undersampling to appropriately balance the dataset, and a 60/40 training and test split. Epochs represent the number of passes made over the training data in order for the neural network to fine tune itself under supervision. Although more epochs does not guarantee better performance, it is ofte nthe case that a larger number of epochs within reason can improve metric results. However, too many epochs can cause overfitting to the training data and hurt generalizability.
 
 \subsection{RTP Detection}
-The primary motivation for designing the density analysis model was to capture the spatial hidden representations which may be present in geometric transformations of packet payloads as dynamic ports and weak signatures make traditional signature-based or port-based methodologies ineffective. The classification results of the \textsc{Date} model are provided in Table~\ref{tab:rtpresults}. Table~\ref{tab:rtpresultslsh} show the combined \textsc{Alpine} and \textsc{Palm} technique's results for the RTP classification task. There is clear improvement for the \textsc{Date} model.
+Our primary goal in designing \textsc{Date} was to capture spatial hidden representaitons which may be present in these geometric reinterpretations of packets. These features may present advantage to our classifier as dynamic ports and weak signatures found in these protocols make traditional signature-based and port-based methods ineffective. The classification results of the \textsc{Date} model are provided in Table~\ref{tab:rtpresults}. Table~\ref{tab:rtpresultslsh} show the combined \textsc{Alpine} and \textsc{Palm} technique's results for the RTP classification task. There is clear improvement for the \textsc{Date} model.
 
 \begin{table} [h!]
 \centering
@@ -54,7 +54,7 @@ Class & P & R & F1 \\
 \end{table}
 
 \subsection{H.225 Detection}
-A similar detection problem exists for H.225 signaling protocol, which handles the registration and call setup for certain VoIP architectures using the H.323 protocol suite. Like RTP, the H.225 data may arrive to an endpoint first before the H.323 data, and also suffers from a weak signature. Thus, we additionally tested \textsc{Date}'s ability to detect H.225 traffic from non-H.225 traffic. Our setup of the dataset labels and the DBSCAN configuration was similar to the RTP test and results are given in Table~\ref{tab:h225results}. The performance of the LSH models is provided in Table~\ref{tab:h225resultslsh} for a baseline.
+H.225 handles the registration and call setup for certain VoIP architectures using the H.323 protocol suite. Similar to RTP, H.225 data can arrive at the endpoint first before H.323 which it must be paired with. It also does not have a strong signature. Thus, we additionally tested \textsc{Date}'s ability to detect H.225 traffic from non-H.225 traffic. Our setup of the dataset labels and the DBSCAN configuration was similar to the RTP test and results are given in Table~\ref{tab:h225results}. The performance of \textsc{Alpine} and \textsc{Palm} are provided in Table~\ref{tab:h225resultslsh} for a baseline.
 
 \begin{table} [h!]
 \centering
