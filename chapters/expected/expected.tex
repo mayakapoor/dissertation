@@ -1,5 +1,7 @@
 As a contribution for this work, we propose realizing the \textsc{Forager} toolkit as a usable software package and system for individual use. We project an initial release of this software by June 2023. System progress and planned development can be viewed in the Gantt chart in Figure~\ref{fig:gantt}. The final deliverable of this system will be a command line interface (CLI) application installed through PyPi. We will provide the following components in the initial release.
 
+\medskip
+
 \textbf{TaPcap: } This option will parse input PCAP files, extracting header features and/or payloads into CSV or text file format.
 
 \textbf{\textsc{TRex}: } This option will find frequent tokens according to a provided threshold from a CSV output from \textsc{TaPcap}.
@@ -16,10 +18,10 @@ As a contribution for this work, we propose realizing the \textsc{Forager} toolk
 
 \textbf{Multi-modality: } \textsc{Forager} will support using one or more of the \textsc{Alpine}, \textsc{Palm}, \textsc{Maple}, and \textsc{Date} models together so that the packet may be analyzed from multiple representations. We will use votes in a combined ensemble classifier and return the index with the most votes as the classification.
 
-\textbf{Tagging: } \textsc{Forager} will write the classification to a column in the \textsc{TaPcap} file.
+%\textbf{Tagging: } \textsc{Forager} will write the classification to a column in the \textsc{TaPcap} file.
 
 \begin{figure*}
 \includegraphics[width=\textwidth,height=\textheight]{chapters/expected/img/gantt.png}
-\caption{Gantt chart of \textsc{Forager} 1.0.}
+\caption{Gantt chart of \textsc{Forager} 1.0}
 \label{fig:gantt}
 \end{figure*}

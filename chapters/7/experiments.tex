@@ -68,7 +68,7 @@ VPN: VoIP & 0.99 & 1.00 & \textbf{1.00} & 0.99 & 1.00 & 0.99 & 1.00 & 0.98 & 0.9
 \hline
 \end{tabular}}
 \label{tab:vpnresults}
-\caption{Results for classifying VPN data.}
+\caption{Results for classifying VPN data}
 \end{table*}
 
 \subsection{Tor Traffic Profiling}
@@ -104,7 +104,7 @@ Vuze & -- & -- & -- & -- & -- & -- & 0.98 & 0.72 & 0.83 & 0.97 & 0.73 & \textbf{
 Youtube & -- & -- & -- & -- & -- & -- & 0.95 & 0.94 & 0.94 & 0.94 & 0.95 & 0.95 & 0.94 & 0.96 & \textbf{0.95} \\
 \hline
 \end{tabular}}
-\caption{Results for classifying Tor data by application.}
+\caption{Results for classifying Tor data by application}
 \label{tab:torappresults}
 \end{table*}
 
@@ -131,7 +131,7 @@ VOIP & 0.58 & 0.61 & 0.59 & 0.99 & 0.99 & \textbf{0.99} & 0.72 & 0.97 & 0.83 & 0
 \hline
 \end{tabular}}
 \label{tab:tortrafficresults}
-\caption{Results for classifying Tor data by traffic type.}
+\caption{Results for classifying Tor data by traffic type}
 \end{table*}
 
 Another type of tunneled traffic we want to identify and profile on port 443 is anything running over Tor. We again ran our three configurations of the \textsc{Forager} toolkit against the Tor dataset. Deep Packet~\cite{deeppacket} also ran their SAE and CNN models against this data, but only report a portion of results. We provide a comparison against what they do report for completeness, and note that the \textsc{Forager} models are a dramatic improvement in terms of capability. Their model is unable to handle most of the application classes, whereas \textsc{Forager} can adapt to all applications and returns results as high as those in the VPN classification task. This result demonstrates the versatility of \textsc{Forager} compared to the state-of-the-art and current existing frameworks. Table~\ref{tab:torappresults} shows results of the application classification task. We also show comparative results of traffic type classification with work performed by Lashkari et al~\cite{didarknet} in their DIDarknet system which uses a two-dimensional convolutional neural network to characterize VPN and Tor traffic. It is important to note that unlike Deep Packet and \textsc{Forager} models, DIDarknet's CNN relies on flow-based features. Both we and Deep Packet prefer a stateless approach for best-effort, per-packet classification and use features of the individual packets themselves. Choorod et al~\cite{choorod2022tor} provide results of single packet classification of the Tor dataset using features extracted with Charcount from the Posit toolkit along with a decision tree-based algorithm called J48. This performed remarkably well on the traffic type classification task, and we also compare against their results. They marginally outperform the \textsc{Forager}  system; but both identified Tor traffic with a much greater accuracy and F1 score than the flow-based system. Choorod et al did not provide results for application-based identification, and it is unclear if their method would generalize to any other problems or has been attempted on any other data sets. The experiment results demonstrate that the system could be used to isolate Tor traffic on port 443, or any traffic stream. In the context of the threat model, Alice can determine if and when Bob is using Tor routing, which is useful for further track and trace. She also has a much greater insight into the traffic type and applications than other models previously gave, advancing the state of the art. A summarization is provided in Table~\ref{tab:classresults}.
@@ -181,21 +181,21 @@ Compressed versus encrypted traffic both tend to exhibit highly entropic behavio
 \begin{figure} [ht!]
 \centering
 \includegraphics[scale=0.4]{chapters/7/img/tls_nontls.png}
-\caption{Plaintext versus encrypted traffic results.}
+\caption{Plaintext versus encrypted traffic results}
 \label{fig:tlsnontls}
 \end{figure}
 
 \begin{figure} [ht!]
 \centering
 \includegraphics[scale=0.4]{chapters/7/img/compressed_tls.png}
-\caption{Compressed versus encrypted traffic results.}
+\caption{Compressed versus encrypted traffic results}
 \label{fig:tlscomp}
 \end{figure}
 
 \begin{figure} [ht!]
 \centering
 \includegraphics[scale=0.4]{chapters/7/img/encrypted_compressed.png}
-\caption{Compression type classification results.}
+\caption{Compression type classification results}
 \label{fig:comptype}
 \end{figure}
 
@@ -252,7 +252,7 @@ Our final experiment was to detect DNS traffic running over HTTPS. A perpetual c
 \textit{Benign} & 0.96 & 1.00 & 0.98 & 0.95 & 1.00 & 0.97 & 0.96 & 0.99 & 0.97 \\
 \hline
 \end{tabular}
-\caption{Results for classifying DoH/non-DoH and SoH/non-SoH data.}
+\caption{Results for classifying DoH/non-DoH and SoH/non-SoH data}
 \label{tab:dohsohresults}
 \end{table}
 
