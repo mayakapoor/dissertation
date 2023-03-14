@@ -100,7 +100,7 @@ Using only a single dataset or network environment can lead to bias in results~\
 \label{table:results1}
 \end{table}
 
-It is crucial for lawful interception and DPI middleware boxes to be able to autodetect application-layer protocols in order to properly assess, parse, and process seen traffic. The environment on any given signal can be wildly diverse; thus, classification systems must be capable of scaling to large, multiclass problems. Previous systems~\cite{hslf, fpga} have not attempted protocol detection to the scale of a 26-class problem, making this experiment and our model a true and fresh pioneer in the DPI field. We first split our data into training and test sets and extracted features from each of the protocls. Next, we generated hash values for the training samples and indexed them into the forest. For testing, we generate a hash of the input value and perform the similarity search on the trained model. The results of the testing samples are provided in Table~\ref{table:results1}. The evidence shows that the combined model has high accuracy and precision/recall for protocol identifications. Cohen's kappa also shows a strong agreement among the ensemble voters. The method also performs equally well across application types, indicating generalizability. Figure~\ref{fig:combined} shows the confusion matrix results of the classifier's ensemble voting system.
+It is crucial for lawful interception and DPI middleware boxes to be able to autodetect application-layer protocols in order to properly assess, parse, and process seen traffic. The environment on any given signal can be wildly diverse; thus, classification systems must be capable of scaling to large, multiclass problems. Previous systems~\cite{hslf, fpga} have not attempted protocol detection to the scale of a 26-class problem, making this model a true and fresh pioneer in the DPI field. We first split our data into training and test sets and extracted features from each of the protocols. Next, we generated hash values for the training samples and indexed them into the forest. For testing, we generate a hash of the input value and perform the similarity search on the trained model. The results of the testing samples are provided in Table~\ref{table:results1}. The evidence shows that the combined model has high accuracy and precision/recall for protocol identification. Cohen's kappa also shows a strong agreement among the ensemble voters. The method also performs equally well across application types, indicating generalizability. Figure~\ref{fig:combined} shows the confusion matrix results of the classifier's ensemble voting system.
 
 \begin{figure} [ht!]
   \centering
@@ -111,7 +111,7 @@ It is crucial for lawful interception and DPI middleware boxes to be able to aut
 
 \subsection{Traffic Type}
 
-RFCs and standardized documentation necessitate that there are some detectable similarities between protocols. It is reasonable to think that detection of more abstract class types like traffic type (i.e. email, file transfer, web data) would be more heterogeneous and thus more difficult to embed. We experimented with classification by traffic type by amalgamating the dataset into classes as described in Table~\ref{table:dataset} in the datasets section of this work. Results in Figure~\ref{fig:trafficresults} show a confusion matrix of the classification results which are also highly accurate.
+Standardized documentation necessitates that there are some detectable similarities between protocols. It is reasonable to think that detection of more abstract classes like traffic type (i.e. email, file transfer, web data) would be more heterogeneous and thus more difficult to detect by embedding and similarity search. We experimented with classification by traffic type by amalgamating the dataset into classes as described in Table~\ref{table:dataset} in the datasets section of this work. Results in Figure~\ref{fig:trafficresults} show a confusion matrix of the classification results which are also highly accurate.
 
 \begin{figure} [hbt!]
   \centering
@@ -180,7 +180,7 @@ Applied machine learning must keep up with signal processing at very high rates;
 \begin{table*} [ht!]
 \caption{Performance Results for Varied Number of Classes}
 \centering
-\begin{tabular}{| p{0.11\linewidth} | p{0.1\linewidth} | p{0.1\linewidth} | p{0.1\linewidth} | p{0.1\linewidth} | p{0.1\linewidth} | p{0.15\linewidth} | p{0.1\linewidth} |}
+\begin{tabular}{| p{0.11\linewidth} | p{0.08\linewidth} | p{0.09\linewidth} | p{0.09\linewidth} | p{0.09\linewidth} | p{0.09\linewidth} | p{0.13\linewidth} | p{0.1\linewidth} |}
 \hline
 Classes & \# Hashes & \# Samples & Training Time & Test Time & Memory Usage & Throughput & Accuracy \\
 \hline
@@ -201,7 +201,7 @@ Classes & \# Hashes & \# Samples & Training Time & Test Time & Memory Usage & Th
 \label{table:performanceresults}
 \end{table*}
 
-In order to test system scalability in deployment and verify the theoretical complexity discussed in the background section of this work, we performed a series of experiments increasing the number of signatures for a model used to classify HTTP traffic. For a comparitive baseline, we used the regular expression scanning tool built in RExACtor~\cite{rexactor} which uses the Hyperscan 5.4.0 regular expression matching library by Intel~\cite{hyperscan}. All experiments were performed on a single i9 Dell computer with Ubuntu 18.04 installed. In the trials, the number of signatures represented the number of LSH hashes our system or the number of regular expressions added to the sniffer application. We used RExACtor~\cite{rexactor} to generate HTTP signatures from the HTTP traffic in our dataset. Both models performed the classification with 100\% accuracy on all trials.
+In order to test system scalability in deployment and verify the theoretical complexity discussed in the background section of this work, we performed a series of experiments increasing the number of signatures for a model used to classify HTTP traffic. For a comparitive baseline, we used the regular expression scanning tool built in \textsc{Rexactor}~\cite{rexactor} which uses the Hyperscan 5.4.0 regular expression matching library by Intel~\cite{hyperscan}. All experiments were performed on a single i9 Dell computer with Ubuntu 18.04 installed. In the trials, the number of signatures represented the number of LSH hashes our system or the number of regular expressions added to the sniffer application. We used \textsc{Rexactor}~\cite{rexactor} to generate HTTP signatures from the HTTP traffic in our dataset. Both models performed the classification with 100\% accuracy on all trials.
 
 \begin{table}[ht!]
 \centering

@@ -20,7 +20,7 @@ Finally, we also provide the F1 score for ours and other solutions.
 \[\text{F1} = 2 \times \frac{\text{Precision $\times$ Recall}}{\text{Precision + Recall}}\] \par
 \vspace{\baselineskip}
 
-In addition to these data science measurements, we record, analyze, and compare heap usage using valgrind. We also compare the heap allocation for our signatures and signatures from comparable works to show our solution's improvements.
+In addition to these data science measurements, we record, analyze, and compare heap usage using \texttt{valgrind}. We also compare the heap allocation for our signatures and signatures from comparable works to show our solution's improvements.
 
 We use packet capture (PCAP) data from live network captures for both training and testing scenarios. An interesting note on training data is that in our cases, \textsc{Rexactor} did not require more than a few hundred starting lines in order to create quality signatures. We found that as long as the starting lines were from a diverse set of captures so that variable URLs, ports, and addresses were not over-represented, the common features were both discovered and generalized enough for re-usability. This demonstrates that \textsc{Rexactor} may be able to create specific signatures for protocols which may not appear frequently in a data set.
 
@@ -40,7 +40,7 @@ To create HTTP signatures with \textsc{Rexactor}, we used a small data set of mi
  \hline
  LASER \cite{LASER} & N/A & N/A & [HTTP/1.1] \\
  \hline
- Wang et al \cite{WANG2012992} & Request & $\string^$(GET $\vert$ HEAD $\vert$ POST).*HTTP/1.(1$\vert$0)\textbackslash x0D\textbackslash x0A & N/A\\
+ Wang et al \cite{WANG2012992} & Request & $\string^$(GET $\vert$ HEAD $\vert$ POST).*HTTP/1.(1$\vert$0) \textbackslash x0D\textbackslash x0A & N/A\\
  \cline{2-4}
   & Response & $\string^$HTTP/1.(1$\vert$0) [2$\vert$3$\vert$4$\vert$5]0.*\textbackslash x0D\textbackslash x0A & N/A \\
  \hline
@@ -48,7 +48,7 @@ To create HTTP signatures with \textsc{Rexactor}, we used a small data set of mi
  \hline
  \textsc{Rexactor} & Request & $\string^$(GET / $\vert$ POST / $\vert$ POST $\vert$ POST /mail $\vert$ HEAD /).\{0,2048\}( HTTP/1.1\textbackslash r\textbackslash n)\$ & [HTTP/1.]\\
  \cline{2-4}
- & Response & $\string^$(HTTP/1.1 $\vert$HTTP/1.).\{0,3\}.\{0,24\}\textbackslash\textbackslash S(\textbackslash r\textbackslash n)\$ & [HTTP/1.] \\ [1ex]
+ & Response & $\string^$(HTTP/1.1 $\vert$HTTP/1.).\{0,3\}.\{0,24\} \textbackslash\textbackslash S(\textbackslash r\textbackslash n)\$ & [HTTP/1.] \\ [1ex]
  \hline
   \end{tabular}
   \caption{HTTP Signatures and Tokens}
