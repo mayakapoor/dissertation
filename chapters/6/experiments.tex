@@ -11,7 +11,7 @@ All tests were performed on a single CPU of a 1.6 GHz dual-core Intel i5 process
     \end{split}
 \end{equation}
 
-All tests were performed with undersampling to appropriately balance the dataset, and a 60/40 training and test split. Epochs represent the number of passes made over the training data in order for the neural network to fine tune itself under supervision. Although more epochs does not guarantee better performance, it is ofte nthe case that a larger number of epochs within reason can improve metric results. However, too many epochs can cause overfitting to the training data and hurt generalizability.
+All tests were performed with undersampling to appropriately balance the dataset, and a 60\%/40\% training and test split. Epochs represent the number of passes made over the training data in order for the neural network to fine tune itself under supervision. Although more epochs do not guarantee better performance, it is often the case that a larger number of epochs within reason can improve metric results. However, too many epochs can cause overfitting to the training data and hurt generalizability.
 
 \subsection{RTP Detection}
 Our primary goal in designing \textsc{Date} was to capture spatial hidden representaitons which may be present in these geometric reinterpretations of packets. These features may present advantage to our classifier as dynamic ports and weak signatures found in these protocols make traditional signature-based and port-based methods ineffective. The classification results of the \textsc{Date} model are provided in Table~\ref{tab:rtpresults}. Table~\ref{tab:rtpresultslsh} show the combined \textsc{Alpine} and \textsc{Palm} technique's results for the RTP classification task. There is clear improvement for the \textsc{Date} model.
@@ -26,7 +26,7 @@ Class & P & R & F1 \\
 \textit{RTP} & 0.76 & 0.71 & 0.73 \\
 \hline
 \end{tabular}
-\caption{Classification results of RTP vs non-RTP detection for the LSH model}
+\caption{Classification results of RTP vs non-RTP detection for \textsc{Alpine} and \textsc{Palm}}
 \label{tab:rtpresultslsh}
 \end{table}
 
@@ -66,7 +66,8 @@ Class & P & R & F1 \\
 \textit{H.225} & 0.63 & 0.61 & 0.62 \\
 \hline
 \end{tabular}
-\caption{Classification results of H.225 vs non-H.225 detection for the LSH model}
+\caption{Classification results of H.225 vs non-H.225 detection for
+\textsc{Alpine} and \textsc{Palm}}
 \label{tab:h225resultslsh}
 \end{table}
 
