@@ -1,12 +1,10 @@
-As a contribution for this work, we provide the \textsc{Forager} toolkit as a usable software package and system for individual use. This software is a command line interface (CLI) application installed through PyPi and user documentation provided on the ReadTheDocs website~\footnote{}. The following components are included in the initial 1.0 release:
+As a contribution for this work, we provide the \textsc{Forager} toolkit as a usable software package and system for individual use. This software is a command line interface (CLI) application installed through PyPi and user documentation provided through ReadTheDocs. The following components are included in the initial 1.0.0 release:
 
 \medskip
 
-\textbf{TaPCAP~\footnote{}: } This option parses input PCAP and PCAPNG files, extracting header features and/or payloads into CSV format.
+\textbf{TaPCAP: } This option parses input PCAP and PCAPNG files, extracting header features and/or payloads into CSV format. This module can be installed separately~\footnote{https://pypi.org/project/tapcap/} or run from \textsc{Forager}.
 
-\textbf{\textsc{TRex}: } This option finds frequent tokens according to a provided threshold from a CSV output from \textsc{Tapcap}. \textsc{Rexactor} includes this component and can be installed separately~\footnote{}.
-
-\textbf{\textsc{GRex}: } This option performs genetic sequencing alignment of payloads from a CSV output from \textsc{Tapcap}. \textsc{Rexactor} includes this component and can be installed separately~\footnote{}.
+\textbf{\textsc{RExACtor}: } The token option finds frequent tokens according to a provided threshold from a CSV output from \textsc{Tapcap}. The regular expression mode performs genetic sequencing alignment of payloads from a CSV output from \textsc{Tapcap}. \textsc{Rexactor} can be installed as a separate component~\footnote{https://pypi.org/project/rexactor/} or run from \textsc{Forager}.
 
 \textbf{\textsc{Alpine}: } In training mode, this model accepts as input the CSV obtained from \textsc{Tapcap}, generates locality sensitive hashes from the header data, and finalizes and serializes these to an LSHForest~\cite{lshforest}. In testing mode, the trained LSHForest is reloaded from the internal cache. Locality sensitive hashes of the input data are generated and index lookup performed. The returned result is applied to the ensemble voting system if other models are configured.
 
