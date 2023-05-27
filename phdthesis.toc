@@ -4,99 +4,98 @@
 \contentsline {chapter}{LIST OF ABBREVIATIONS}{1}{}%
 \contentsline {chapter}{\numberline {1}INTRODUCTION}{1}{}%
 \contentsline {section}{\numberline {1.1}Problem Statement}{2}{}%
-\contentsline {subsection}{\numberline {1.1.1}Identification and Profiling}{2}{}%
-\contentsline {subsection}{\numberline {1.1.2}Network Architecture}{4}{}%
-\contentsline {subsection}{\numberline {1.1.3}Data Obfuscation and Spoofing}{5}{}%
-\contentsline {subsection}{\numberline {1.1.4}Scalability}{6}{}%
-\contentsline {section}{\numberline {1.2}Proposed Solution}{7}{}%
-\contentsline {section}{\numberline {1.3}Contributions}{8}{}%
-\contentsline {section}{\numberline {1.4}Summarization}{10}{}%
-\contentsline {chapter}{\numberline {2}BACKGROUND}{11}{}%
-\contentsline {section}{\numberline {2.1}Deep Packet Inspection}{12}{}%
-\contentsline {subsection}{\numberline {2.1.1}Port-based Identification}{12}{}%
-\contentsline {subsection}{\numberline {2.1.2}Payload-based Identification}{13}{}%
-\contentsline {subsection}{\numberline {2.1.3}Flow-based Identification}{14}{}%
-\contentsline {section}{\numberline {2.2}Network Traffic Classification}{15}{}%
-\contentsline {chapter}{\numberline {3}REXACTOR - REGULAR EXPRESSION SIGNATURE GENERATION FOR STATELESS PACKET INSPECTION}{16}{}%
-\contentsline {section}{\numberline {3.1}Introduction}{16}{}%
-\contentsline {section}{\numberline {3.2}Previous Work}{18}{}%
-\contentsline {section}{\numberline {3.3}Methodology}{19}{}%
-\contentsline {subsection}{\numberline {3.3.1}TRex: Apriori Tokenization of Packet Payloads}{20}{}%
-\contentsline {subsection}{\numberline {3.3.2}GRex: Genetic Sequence Alignment of Common Substrings}{24}{}%
-\contentsline {subsection}{\numberline {3.3.3}HRex: High Performance Regular Expression Scanning}{28}{}%
-\contentsline {section}{\numberline {3.4}Experiments and Results}{28}{}%
-\contentsline {subsection}{\numberline {3.4.1}Case Study A: HTTP Detection}{31}{}%
-\contentsline {subsection}{\numberline {3.4.2}Case Study B: VoIP Detection}{32}{}%
-\contentsline {section}{\numberline {3.5}Discussion and Limitations}{33}{}%
-\contentsline {chapter}{\numberline {4}ALPINE/PALM - SIMILARITY SEARCH THROUGH LOCALITY-SENSITIVE HASH FINGERPRINTING}{37}{}%
-\contentsline {section}{\numberline {4.1}Introduction}{37}{}%
-\contentsline {section}{\numberline {4.2}Previous Work}{39}{}%
-\contentsline {section}{\numberline {4.3}Methodology}{40}{}%
-\contentsline {subsection}{\numberline {4.3.1}MinHash and Locality-Sensitive Hash Forest}{40}{}%
-\contentsline {subsection}{\numberline {4.3.2}ALPINE: A Locality-Based Packet Inspection Engine}{42}{}%
-\contentsline {subsection}{\numberline {4.3.3}PALM: Payload Analysis Using Locality Sensitive Measurements}{42}{}%
-\contentsline {section}{\numberline {4.4}Experiments and Results}{43}{}%
-\contentsline {subsection}{\numberline {4.4.1}Protocol Auto Detection}{44}{}%
-\contentsline {subsection}{\numberline {4.4.2}Traffic Type}{44}{}%
-\contentsline {subsection}{\numberline {4.4.3}TF-IDF Score Evaluation}{46}{}%
-\contentsline {subsection}{\numberline {4.4.4}Multi-Embeddings}{47}{}%
-\contentsline {subsection}{\numberline {4.4.5}Model Performance and Throughput}{49}{}%
-\contentsline {section}{\numberline {4.5}Discussion and Limitations}{50}{}%
-\contentsline {chapter}{\numberline {5}MAPLE - IMAGE REPRESENTATION AND RECOGNITION OF INTERNET TRAFFIC}{58}{}%
-\contentsline {section}{\numberline {5.1}Introduction}{58}{}%
-\contentsline {section}{\numberline {5.2}Previous Work}{60}{}%
-\contentsline {section}{\numberline {5.3}Methodology}{64}{}%
-\contentsline {subsection}{\numberline {5.3.1}LeNet Model Configuration}{65}{}%
-\contentsline {subsection}{\numberline {5.3.2}ResNet Model Configuration}{65}{}%
-\contentsline {section}{\numberline {5.4}Experiments and Results}{66}{}%
-\contentsline {subsection}{\numberline {5.4.1}RTP Detection}{67}{}%
-\contentsline {subsection}{\numberline {5.4.2}Protocol Auto Detection}{69}{}%
-\contentsline {subsection}{\numberline {5.4.3}User Fingerprinting}{70}{}%
-\contentsline {subsection}{\numberline {5.4.4}Model Performance and Throughput}{70}{}%
-\contentsline {section}{\numberline {5.5}Discussion and Limitations}{71}{}%
-\contentsline {chapter}{\numberline {6}DATE - POINT CLOUD REPRESENTATION AND DENSITY CLUSTERING ANALYSIS OF PACKETS}{72}{}%
-\contentsline {section}{\numberline {6.1}Introduction}{72}{}%
-\contentsline {section}{\numberline {6.2}Previous Work}{72}{}%
-\contentsline {section}{\numberline {6.3}Methodology}{73}{}%
-\contentsline {subsection}{\numberline {6.3.1}Point Cloud Creation}{73}{}%
-\contentsline {subsection}{\numberline {6.3.2}Density-Based Spatial Clustering of Applications With Noise (DBSCAN)}{75}{}%
-\contentsline {subsection}{\numberline {6.3.3}Packet Classification}{77}{}%
-\contentsline {section}{\numberline {6.4}Experiments and Results}{78}{}%
-\contentsline {subsection}{\numberline {6.4.1}RTP Detection}{78}{}%
-\contentsline {subsection}{\numberline {6.4.2}H.225 Detection}{79}{}%
-\contentsline {subsection}{\numberline {6.4.3}Model Performance and Throughput}{79}{}%
-\contentsline {section}{\numberline {6.5}Discussion and Limitations}{80}{}%
-\contentsline {chapter}{\numberline {7}FORAGER - TOWARDS MULTI-EMBEDDINGS AND ENSEMBLE CLASSIFICATION}{82}{}%
-\contentsline {section}{\numberline {7.1}Introduction}{82}{}%
-\contentsline {section}{\numberline {7.2}Previous Work}{84}{}%
-\contentsline {subsection}{\numberline {7.2.1}VPN Traffic Profiling}{84}{}%
-\contentsline {subsection}{\numberline {7.2.2}Darknet Detection and Profiling}{85}{}%
-\contentsline {subsection}{\numberline {7.2.3}Filtering Compressed/Plaintext Traffic}{86}{}%
-\contentsline {subsection}{\numberline {7.2.4}Intrusion Detection over HTTPS}{86}{}%
-\contentsline {section}{\numberline {7.3}Methodology}{87}{}%
-\contentsline {subsection}{\numberline {7.3.1}Threat Model}{87}{}%
-\contentsline {subsubsection}{\numberline {7.3.1.1}Real-Time Monitoring}{88}{}%
-\contentsline {subsubsection}{\numberline {7.3.1.2}Tunnel Tracking}{88}{}%
-\contentsline {subsubsection}{\numberline {7.3.1.3}Covert Data Channels In}{89}{}%
-\contentsline {subsubsection}{\numberline {7.3.1.4}Covert Data Channels Out}{90}{}%
-\contentsline {subsection}{\numberline {7.3.2}System Design}{91}{}%
-\contentsline {subsection}{\numberline {7.3.3}Datasets}{92}{}%
-\contentsline {subsubsection}{\numberline {7.3.3.1}ISCX 2016 VPN-nonVPN Dataset}{92}{}%
-\contentsline {subsubsection}{\numberline {7.3.3.2}Tor Datasets}{93}{}%
-\contentsline {subsubsection}{\numberline {7.3.3.3}CIRA-CIC-DoHBrw-2020 Dataset}{94}{}%
-\contentsline {subsubsection}{\numberline {7.3.3.4}EMews SoH Dataset}{95}{}%
-\contentsline {section}{\numberline {7.4}Experiments and Results}{96}{}%
-\contentsline {subsection}{\numberline {7.4.1}VPN Traffic Profiling}{96}{}%
-\contentsline {subsection}{\numberline {7.4.2}Tor Traffic Profiling}{98}{}%
-\contentsline {subsection}{\numberline {7.4.3}Plaintext Traffic over HTTPS}{100}{}%
-\contentsline {subsection}{\numberline {7.4.4}Compressed Traffic over HTTPS}{101}{}%
-\contentsline {subsection}{\numberline {7.4.5}SSH over HTTPS}{104}{}%
-\contentsline {subsection}{\numberline {7.4.6}DNS over HTTPS}{104}{}%
-\contentsline {subsection}{\numberline {7.4.7}Performance Metrics}{105}{}%
-\contentsline {section}{\numberline {7.5}Discussion and Limitations}{106}{}%
-\contentsline {chapter}{\numberline {8}CONTRIBUTIONS AND DELIVERABLES}{107}{}%
-\contentsline {chapter}{\numberline {9}CONCLUSIONS}{109}{}%
-\contentsline {section}{\numberline {9.1}Future Work}{109}{}%
-\contentsline {section}{\numberline {9.2}Summarization}{110}{}%
-\contentsline {chapter}{REFERENCES}{112}{}%
+\contentsline {subsection}{\numberline {1.1.1}Data Complexity}{2}{}%
+\contentsline {subsection}{\numberline {1.1.2}Network Complexity}{3}{}%
+\contentsline {subsection}{\numberline {1.1.3}Scalability}{5}{}%
+\contentsline {section}{\numberline {1.2}Proposed Solution}{6}{}%
+\contentsline {section}{\numberline {1.3}Contributions}{7}{}%
+\contentsline {section}{\numberline {1.4}Summarization}{9}{}%
+\contentsline {chapter}{\numberline {2}BACKGROUND}{10}{}%
+\contentsline {section}{\numberline {2.1}Deep Packet Inspection}{11}{}%
+\contentsline {subsection}{\numberline {2.1.1}Port-based Identification}{11}{}%
+\contentsline {subsection}{\numberline {2.1.2}Payload-based Identification}{12}{}%
+\contentsline {subsection}{\numberline {2.1.3}Flow-based Identification}{13}{}%
+\contentsline {section}{\numberline {2.2}Network Traffic Classification}{14}{}%
+\contentsline {chapter}{\numberline {3}REXACTOR - REGULAR EXPRESSION SIGNATURE GENERATION FOR STATELESS PACKET INSPECTION}{15}{}%
+\contentsline {section}{\numberline {3.1}Introduction}{15}{}%
+\contentsline {section}{\numberline {3.2}Previous Work}{17}{}%
+\contentsline {section}{\numberline {3.3}Methodology}{18}{}%
+\contentsline {subsection}{\numberline {3.3.1}TRex: Apriori Tokenization of Packet Payloads}{19}{}%
+\contentsline {subsection}{\numberline {3.3.2}GRex: Genetic Sequence Alignment of Common Substrings}{23}{}%
+\contentsline {subsection}{\numberline {3.3.3}HRex: High Performance Regular Expression Scanning}{27}{}%
+\contentsline {section}{\numberline {3.4}Experiments and Results}{27}{}%
+\contentsline {subsection}{\numberline {3.4.1}Case Study A: HTTP Detection}{30}{}%
+\contentsline {subsection}{\numberline {3.4.2}Case Study B: VoIP Detection}{31}{}%
+\contentsline {section}{\numberline {3.5}Discussion and Limitations}{32}{}%
+\contentsline {chapter}{\numberline {4}ALPINE/PALM - SIMILARITY SEARCH THROUGH LOCALITY-SENSITIVE HASH FINGERPRINTING}{36}{}%
+\contentsline {section}{\numberline {4.1}Introduction}{36}{}%
+\contentsline {section}{\numberline {4.2}Previous Work}{38}{}%
+\contentsline {section}{\numberline {4.3}Methodology}{39}{}%
+\contentsline {subsection}{\numberline {4.3.1}MinHash and Locality-Sensitive Hash Forest}{39}{}%
+\contentsline {subsection}{\numberline {4.3.2}ALPINE: A Locality-Based Packet Inspection Engine}{41}{}%
+\contentsline {subsection}{\numberline {4.3.3}PALM: Payload Analysis Using Locality Sensitive Measurements}{41}{}%
+\contentsline {section}{\numberline {4.4}Experiments and Results}{42}{}%
+\contentsline {subsection}{\numberline {4.4.1}Protocol Auto Detection}{43}{}%
+\contentsline {subsection}{\numberline {4.4.2}Traffic Type}{43}{}%
+\contentsline {subsection}{\numberline {4.4.3}TF-IDF Score Evaluation}{45}{}%
+\contentsline {subsection}{\numberline {4.4.4}Multi-Embeddings}{46}{}%
+\contentsline {subsection}{\numberline {4.4.5}Model Performance and Throughput}{48}{}%
+\contentsline {section}{\numberline {4.5}Discussion and Limitations}{49}{}%
+\contentsline {chapter}{\numberline {5}MAPLE - IMAGE REPRESENTATION AND RECOGNITION OF INTERNET TRAFFIC}{57}{}%
+\contentsline {section}{\numberline {5.1}Introduction}{57}{}%
+\contentsline {section}{\numberline {5.2}Previous Work}{59}{}%
+\contentsline {section}{\numberline {5.3}Methodology}{63}{}%
+\contentsline {subsection}{\numberline {5.3.1}LeNet Model Configuration}{64}{}%
+\contentsline {subsection}{\numberline {5.3.2}ResNet Model Configuration}{64}{}%
+\contentsline {section}{\numberline {5.4}Experiments and Results}{65}{}%
+\contentsline {subsection}{\numberline {5.4.1}RTP Detection}{66}{}%
+\contentsline {subsection}{\numberline {5.4.2}Protocol Auto Detection}{68}{}%
+\contentsline {subsection}{\numberline {5.4.3}User Fingerprinting}{69}{}%
+\contentsline {subsection}{\numberline {5.4.4}Model Performance and Throughput}{69}{}%
+\contentsline {section}{\numberline {5.5}Discussion and Limitations}{70}{}%
+\contentsline {chapter}{\numberline {6}DATE - POINT CLOUD REPRESENTATION AND DENSITY CLUSTERING ANALYSIS OF PACKETS}{71}{}%
+\contentsline {section}{\numberline {6.1}Introduction}{71}{}%
+\contentsline {section}{\numberline {6.2}Previous Work}{71}{}%
+\contentsline {section}{\numberline {6.3}Methodology}{72}{}%
+\contentsline {subsection}{\numberline {6.3.1}Point Cloud Creation}{72}{}%
+\contentsline {subsection}{\numberline {6.3.2}Density-Based Spatial Clustering of Applications With Noise (DBSCAN)}{74}{}%
+\contentsline {subsection}{\numberline {6.3.3}Packet Classification}{76}{}%
+\contentsline {section}{\numberline {6.4}Experiments and Results}{77}{}%
+\contentsline {subsection}{\numberline {6.4.1}RTP Detection}{77}{}%
+\contentsline {subsection}{\numberline {6.4.2}H.225 Detection}{78}{}%
+\contentsline {subsection}{\numberline {6.4.3}Model Performance and Throughput}{78}{}%
+\contentsline {section}{\numberline {6.5}Discussion and Limitations}{79}{}%
+\contentsline {chapter}{\numberline {7}FORAGER - TOWARDS MULTI-EMBEDDINGS AND ENSEMBLE CLASSIFICATION}{81}{}%
+\contentsline {section}{\numberline {7.1}Introduction}{81}{}%
+\contentsline {section}{\numberline {7.2}Previous Work}{83}{}%
+\contentsline {subsection}{\numberline {7.2.1}VPN Traffic Profiling}{83}{}%
+\contentsline {subsection}{\numberline {7.2.2}Darknet Detection and Profiling}{84}{}%
+\contentsline {subsection}{\numberline {7.2.3}Filtering Compressed/Plaintext Traffic}{85}{}%
+\contentsline {subsection}{\numberline {7.2.4}Intrusion Detection over HTTPS}{85}{}%
+\contentsline {section}{\numberline {7.3}Methodology}{86}{}%
+\contentsline {subsection}{\numberline {7.3.1}Threat Model}{86}{}%
+\contentsline {subsubsection}{\numberline {7.3.1.1}Real-Time Monitoring}{87}{}%
+\contentsline {subsubsection}{\numberline {7.3.1.2}Tunnel Tracking}{87}{}%
+\contentsline {subsubsection}{\numberline {7.3.1.3}Covert Data Channels In}{88}{}%
+\contentsline {subsubsection}{\numberline {7.3.1.4}Covert Data Channels Out}{89}{}%
+\contentsline {subsection}{\numberline {7.3.2}System Design}{90}{}%
+\contentsline {subsection}{\numberline {7.3.3}Datasets}{91}{}%
+\contentsline {subsubsection}{\numberline {7.3.3.1}ISCX 2016 VPN-nonVPN Dataset}{91}{}%
+\contentsline {subsubsection}{\numberline {7.3.3.2}Tor Datasets}{92}{}%
+\contentsline {subsubsection}{\numberline {7.3.3.3}CIRA-CIC-DoHBrw-2020 Dataset}{93}{}%
+\contentsline {subsubsection}{\numberline {7.3.3.4}EMews SoH Dataset}{94}{}%
+\contentsline {section}{\numberline {7.4}Experiments and Results}{95}{}%
+\contentsline {subsection}{\numberline {7.4.1}VPN Traffic Profiling}{95}{}%
+\contentsline {subsection}{\numberline {7.4.2}Tor Traffic Profiling}{97}{}%
+\contentsline {subsection}{\numberline {7.4.3}Plaintext Traffic over HTTPS}{99}{}%
+\contentsline {subsection}{\numberline {7.4.4}Compressed Traffic over HTTPS}{100}{}%
+\contentsline {subsection}{\numberline {7.4.5}SSH over HTTPS}{103}{}%
+\contentsline {subsection}{\numberline {7.4.6}DNS over HTTPS}{103}{}%
+\contentsline {subsection}{\numberline {7.4.7}Performance Metrics}{104}{}%
+\contentsline {section}{\numberline {7.5}Discussion and Limitations}{105}{}%
+\contentsline {chapter}{\numberline {8}CONTRIBUTIONS AND DELIVERABLES}{106}{}%
+\contentsline {chapter}{\numberline {9}CONCLUSIONS}{108}{}%
+\contentsline {section}{\numberline {9.1}Future Work}{108}{}%
+\contentsline {section}{\numberline {9.2}Summarization}{109}{}%
+\contentsline {chapter}{REFERENCES}{111}{}%
 \contentsfinish 
